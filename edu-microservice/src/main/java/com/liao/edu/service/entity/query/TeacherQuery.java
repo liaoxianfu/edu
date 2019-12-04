@@ -18,11 +18,11 @@ public class TeacherQuery implements Serializable {
     @ApiModelProperty("根据教师姓名，模糊查询使用")
     private String teacherName;
 
-    @ApiModelProperty("根据教师等级查询")
-    private Integer level;
+    @ApiModelProperty("根据教师等级查询 必须是大于等于0整数")
+    private String level;
 
     @ApiModelProperty("开始时间")
-    private String  startTime;
+    private String startTime;
 
     @ApiModelProperty("结束时间")
     private String endTime;

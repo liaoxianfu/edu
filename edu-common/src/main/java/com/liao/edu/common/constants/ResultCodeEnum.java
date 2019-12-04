@@ -9,6 +9,8 @@ import lombok.Getter;
 @Getter
 public enum ResultCodeEnum {
     SUCCESS(true, 20000, "成功"),
+    BAD_SQL_GRAMMAR(false, 21001, "sql语法错误"),
+    JSON_PARSE_ERROR(false, 21002, "json解析异常"),
     UNKNOWN_REASON(false, 20001, "未知错误");
 
     private Boolean success;
@@ -22,4 +24,5 @@ public enum ResultCodeEnum {
         this.code = code;
         this.message = message;
     }
+
 }

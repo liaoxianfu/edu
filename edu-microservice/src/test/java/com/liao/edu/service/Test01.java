@@ -1,5 +1,11 @@
 package com.liao.edu.service;
 
+import com.aliyun.oss.OSS;
+import com.aliyun.oss.OSSClientBuilder;
+import com.aliyun.oss.model.Bucket;
+import com.aliyun.oss.model.OSSObject;
+import com.aliyun.oss.model.OSSObjectSummary;
+import com.aliyun.oss.model.ObjectListing;
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
@@ -11,12 +17,16 @@ import com.baomidou.mybatisplus.generator.config.StrategyConfig;
 import com.baomidou.mybatisplus.generator.config.po.TableFill;
 import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
@@ -92,4 +102,80 @@ public class Test01 {
         mpg.execute();
 
     }
+
+    private OSS ossClient;
+
+    @Before
+    public void initBucket() {
+        String endpoint = "http://oss-cn-shanghai.aliyuncs.com";
+        String accessKeyId = "LTAI4FifscMX9Y3aDxwaZRxD";
+        String accessKeySecret = "HzhELopprtJTgkN28UZEp0uSgq28kC";
+        ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
+    }
+
+
+    @Test
+    public void testOss() {
+        // 列出存储空间。
+        List<Bucket> buckets = ossClient.listBuckets();
+        buckets.forEach(bucket -> {
+            System.out.println(bucket.getName());
+        });
+
+    }
+
+    @Test
+    public void upload() {
+        String bucketName = "edu-01";
+// <yourObjectName>上传文件到OSS时需要指定包含文件后缀在内的完整路径，例如abc/efg/123.jpg。
+        String objectName = "demo.txt";
+// 上传内容到指定的存储空间（bucketName）并保存为指定的文件名称（objectName）。
+        String content = "Hello OSS";
+        ossClient.putObject(bucketName, objectName, new ByteArrayInputStream(content.getBytes()));
+    }
+
+
+    @Test
+    public void download() throws IOException {
+        String bucketName = "edu-01";
+// <yourObjectName>从OSS下载文件时需要指定包含文件后缀在内的完整路径，例如abc/efg/123.jpg。
+        String objectName = "demo.txt";
+
+
+// 调用ossClient.getObject返回一个OSSObject实例，该实例包含文件内容及文件元信息。
+        OSSObject ossObject = ossClient.getObject(bucketName, objectName);
+// 调用ossObject.getObjectContent获取文件输入流，可读取此输入流获取其内容。
+        InputStream content = ossObject.getObjectContent();
+        if (content != null) {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(content));
+            while (true) {
+                String line = reader.readLine();
+                if (line == null) break;
+                System.out.println("\n" + line);
+            }
+            // 数据读取完成后，获取的流必须关闭，否则会造成连接泄漏，导致请求无连接可用，程序无法正常工作。
+            content.close();
+        }
+    }
+
+
+    @Test
+    public void listObj(){
+
+        ObjectListing objectListing = ossClient.listObjects("edu-01");
+        List<OSSObjectSummary> objectSummaries = objectListing.getObjectSummaries();
+        objectSummaries.forEach(ossObjectSummary -> {
+            String s = ossObjectSummary.getKey() + "---" + ossObjectSummary.getSize();
+            System.out.println(s);
+        });
+
+    }
+
+
+    @After
+    public void close() {
+        ossClient.shutdown();
+    }
+
+
 }

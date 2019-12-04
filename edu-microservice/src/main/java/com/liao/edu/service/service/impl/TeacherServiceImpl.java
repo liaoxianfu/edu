@@ -9,6 +9,7 @@ import com.liao.edu.service.entity.query.TeacherQuery;
 import com.liao.edu.service.mapper.TeacherMapper;
 import com.liao.edu.service.service.TeacherService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,10 +27,10 @@ import java.util.Map;
  * @author liao
  * @since 2019-11-28
  */
+@Slf4j
 @Service
 public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> implements TeacherService {
 
-    private static Logger logger = LoggerFactory.getLogger(TeacherServiceImpl.class);
 
     @Resource
     private TeacherMapper teacherMapper;
@@ -38,12 +39,12 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
     public R teacherQuery(Page<Teacher> page, TeacherQuery teacherQuery) {
         // 打印日志
 
-        logger.debug("获取到的teacherQuery为{}", teacherQuery);
+        log.debug("获取的查询信息为{}", teacherQuery);
         QueryWrapper<Teacher> queryWrapper = null;
         if (teacherQuery != null) {
             queryWrapper = new QueryWrapper<>();
             String teacherName = teacherQuery.getTeacherName();
-            Integer level = teacherQuery.getLevel();
+            String level = teacherQuery.getLevel();
             String startTime = teacherQuery.getStartTime();
             String endTime = teacherQuery.getEndTime();
             if (!StringUtils.isEmpty(teacherName)) {
@@ -51,15 +52,15 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
             }
 
 
-            if (level != null) {
+            if (!StringUtils.isEmpty(level)) {
                 queryWrapper.eq("level", level);
             }
 
-            if (startTime != null) {
+            if (!StringUtils.isEmpty(startTime)) {
                 queryWrapper.ge("gmt_create", startTime);
             }
 
-            if (endTime != null) {
+            if (!StringUtils.isEmpty(endTime)) {
                 queryWrapper.le("gmt_create", endTime);
             }
         }

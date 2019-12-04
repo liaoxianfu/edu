@@ -18,6 +18,8 @@
     <modules>
         <module>edu-microservice</module>
         <module>edu-common</module>
+        <module>edu-aliyunoss</module>
+        <module>edu-aliyunOSS</module>
     </modules>
 
     <properties>

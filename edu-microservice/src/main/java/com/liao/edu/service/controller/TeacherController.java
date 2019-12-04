@@ -35,12 +35,11 @@ public class TeacherController {
         this.teacherService = teacherService;
     }
 
-    @ApiImplicitParam("根据分页与特定条件查询教师列表")
+    @ApiOperation("根据分页与特定条件查询教师列表")
     @GetMapping("/{current}/{size}")
-    public R findUser(
-            @ApiParam(value = "第几页", required = true) @PathVariable int current,
-            @ApiParam(value = "页面展示数量", required = true) @PathVariable int size,
-            @ApiParam(value = "查询条件", required = false) TeacherQuery teacherQuery
+    public R findUser(@ApiParam(name = "current",value = "第几页", required = true) @PathVariable int current,
+            @ApiParam(name = "size",value = "页面展示数量", required = true) @PathVariable int size,
+            @ApiParam(name="teacher",value = "查询条件", required = false) TeacherQuery teacherQuery
     ) {
         logger.debug("获取的teacherQuery为{}", teacherQuery);
         Page<Teacher> teacherPage = new Page<>(current, size);

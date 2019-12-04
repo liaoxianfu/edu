@@ -80,4 +80,12 @@ public class R {
         this.setData(map);
         return this;
     }
+
+    public static  R codeEnum(ResultCodeEnum codeEnum) {
+        R r = new R();
+        r.success = codeEnum.getSuccess();
+        r.code = codeEnum.getCode();
+        r.message = codeEnum.getMessage();
+        return r;
+    }
 }
