@@ -18,7 +18,6 @@
     <modules>
         <module>edu-microservice</module>
         <module>edu-common</module>
-        <module>edu-aliyunoss</module>
         <module>edu-aliyunOSS</module>
     </modules>
 
@@ -31,6 +30,8 @@
         <velocity.version>2.1</velocity.version>
         <mysql.version>8.0.18</mysql.version>
         <edu.version>1.0.0-SNAPSHOT</edu.version>
+        <aliyun.oss.version>3.8.0</aliyun.oss.version>
+        <poi.version>4.1.1</poi.version>
     </properties>
 
 
@@ -78,6 +79,19 @@
                 <version>${mysql.version}</version>
             </dependency>
         </dependencies>
-
     </dependencyManagement>
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <configuration>
+                        <source>1.8</source>
+                        <target>1.8</target>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 </project>

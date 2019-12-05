@@ -108,8 +108,8 @@ public class Test01 {
     @Before
     public void initBucket() {
         String endpoint = "http://oss-cn-shanghai.aliyuncs.com";
-        String accessKeyId = "LTAI4FifscMX9Y3aDxwaZRxD";
-        String accessKeySecret = "HzhELopprtJTgkN28UZEp0uSgq28kC";
+        String accessKeyId = "LTAI4FtxWtr8qX1yTi2xjPKR";
+        String accessKeySecret = "w0qA36wu5SiLX9BAmITyC0l8BbDEVe";
         ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
     }
 
