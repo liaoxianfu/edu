@@ -7,10 +7,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -29,10 +26,10 @@ public class OssController {
         this.ossService = ossService;
     }
 
-    @PostMapping("/upload")
+    @PostMapping("/upload/{fileHost}")
     public R upload(@ApiParam(name = "file", value = "文件", required = true)
-                    @RequestParam MultipartFile file) {
-        String upload = ossService.upload(file);
+                    @RequestParam MultipartFile file, @PathVariable String fileHost) {
+        String upload = ossService.upload(file, fileHost);
         if (!StringUtils.isEmpty(upload)) {
             return R.ok().message("文件上传成功").data("url", upload);
         } else {

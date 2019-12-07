@@ -14,4 +14,3 @@ aliyun:
       accessKeyId: LTAI4FtxWtr8qX1yTi2xjPKR
       accessKeySecret: w0qA36wu5SiLX9BAmITyC0l8BbDEVe
       bucket: edu-01
-      fileHost: avatar # 存储的文件夹

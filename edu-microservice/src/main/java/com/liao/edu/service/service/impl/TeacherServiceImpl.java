@@ -38,7 +38,6 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
     @Override
     public R teacherQuery(Page<Teacher> page, TeacherQuery teacherQuery) {
         // 打印日志
-
         log.debug("获取的查询信息为{}", teacherQuery);
         QueryWrapper<Teacher> queryWrapper = null;
         if (teacherQuery != null) {
@@ -47,10 +46,10 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
             String level = teacherQuery.getLevel();
             String startTime = teacherQuery.getStartTime();
             String endTime = teacherQuery.getEndTime();
+
             if (!StringUtils.isEmpty(teacherName)) {
                 queryWrapper.like("name", teacherName);
             }
-
 
             if (!StringUtils.isEmpty(level)) {
                 queryWrapper.eq("level", level);

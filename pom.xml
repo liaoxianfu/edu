@@ -33,6 +33,7 @@
         <aliyun.oss.version>3.8.0</aliyun.oss.version>
         <poi.version>4.1.1</poi.version>
         <joda-time.version>2.10.5</joda-time.version>
+        <commons-io.version>2.6</commons-io.version>
     </properties>
 
 

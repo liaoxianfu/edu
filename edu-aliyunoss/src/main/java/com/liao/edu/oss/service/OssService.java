@@ -10,8 +10,9 @@ public interface OssService {
     /**
      * 上传文件到阿里云oss
      *
-     * @param file 文件
+     * @param file     文件
+     * @param fileHost 文件主机
      * @return url
      */
-    String upload(MultipartFile file);
+    String upload(MultipartFile file, String fileHost);
 }

@@ -15,13 +15,21 @@ spring:
     time-zone: GMT+8 # 时区设置为东八区
 
 
+# 日志配置
+
 
 mybatis-plus:
   configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
   global-config:
     db-config:
       logic-delete-value: 1 # 逻辑已删除值(默认为 1)
       logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
+
+logging:
+  level:
+    com.liao: debug
+  file:
+    path: /log/edu
 
 

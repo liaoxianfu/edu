@@ -21,8 +21,9 @@ import java.util.UUID;
 @Slf4j
 public class OssServiceImpl implements OssService {
     @Override
-    public String upload(MultipartFile file) {
+    public String upload(MultipartFile file, String fileHost) {
         OssEntity ossEntity = new OssEntityBuilder().build();
+        ossEntity.setFileHost(fileHost);
         String uploadUrl = null;
         try {
             // 文件名 UUID+文件扩展名

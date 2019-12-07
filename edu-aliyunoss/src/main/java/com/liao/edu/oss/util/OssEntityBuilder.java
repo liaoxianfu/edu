@@ -20,13 +20,12 @@ public class OssEntityBuilder {
 
     private String bucketName = ConstantPropertiesUtil.BUCKET_NAME;
 
-    private String fileHost = ConstantPropertiesUtil.FILE_HOST;
+
 
     public OssEntity build() {
         OssEntity ossEntity = new OssEntity();
         ossEntity.setEndpoint(endpoint);
         ossEntity.setBucketName(bucketName);
-        ossEntity.setFileHost(fileHost);
         ossEntity.setKeyId(keyId);
         ossEntity.setKeySecret(keySecret);
         OSS ossClient = new OSSClientBuilder().build(endpoint, keyId, keySecret);

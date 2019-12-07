@@ -10,6 +10,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
@@ -22,13 +23,12 @@ import org.springframework.web.bind.annotation.*;
  * @author liao
  * @since 2019-11-28
  */
-
+@Slf4j
 @Api(value = "teacher controller")
 @RestController
 @RequestMapping("/admin/edu/teacher")
 public class TeacherController {
 
-    private static Logger logger = LoggerFactory.getLogger(TeacherController.class);
     private final TeacherService teacherService;
 
     public TeacherController(TeacherService teacherService) {
@@ -39,9 +39,9 @@ public class TeacherController {
     @GetMapping("/{current}/{size}")
     public R findUser(@ApiParam(name = "current",value = "第几页", required = true) @PathVariable int current,
             @ApiParam(name = "size",value = "页面展示数量", required = true) @PathVariable int size,
-            @ApiParam(name="teacher",value = "查询条件", required = false) TeacherQuery teacherQuery
+            @ApiParam(name="teacher",value = "查询条件") TeacherQuery teacherQuery
     ) {
-        logger.debug("获取的teacherQuery为{}", teacherQuery);
+        log.debug("获取的teacherQuery为{}", teacherQuery);
         Page<Teacher> teacherPage = new Page<>(current, size);
         return teacherService.teacherQuery(teacherPage, teacherQuery);
     }
