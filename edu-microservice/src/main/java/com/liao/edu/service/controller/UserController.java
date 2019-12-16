@@ -1,11 +1,9 @@
 package com.liao.edu.service.controller;
 
 import com.liao.edu.common.vo.R;
+import com.liao.edu.service.entity.User;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author liao
@@ -16,14 +14,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/user")
 public class UserController {
     @PostMapping("/login")
-    public R login() {
-        log.info("登录demo");
+    public R login(@RequestBody User user) {
+        log.info(user.getUsername());
+        log.info(user.getPassword());
         return R.ok().data("token", "admin-token");
     }
 
     @GetMapping("/info")
-    public R info() {
-        log.info("info demo");
+    public R info(String token) {
+        log.info("token={}",token);
 
         return R.ok().data("roles", "[\"admin\"]")
                 .data("introduction", "I am a super administrator")

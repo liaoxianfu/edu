@@ -1,16 +1,14 @@
 package com.liao.edu.service.service;
 
-import com.liao.edu.service.entity.Subject;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.liao.edu.common.vo.SubjectVo;
+import com.liao.edu.service.entity.Subject;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
-import java.util.Map;
 
 /**
- * <p>
- * 课程科目 服务类
- * </p>
+ * 课程科目的service层
  *
  * @author liao
  * @since 2019-11-28
@@ -30,5 +28,44 @@ public interface SubjectService extends IService<Subject> {
      *
      * @return map
      */
-    Map<String, List<String>> getAllSubject();
+    List<SubjectVo> getAllSubject();
+
+    /**
+     * 通过id删除数据
+     *
+     * @return bool
+     */
+    boolean deleteSubjectById(String id);
+
+    /**
+     * 添加标题
+     *
+     * @param subject 标题
+     * @return 是否添加成功
+     */
+    boolean addSubject(Subject subject);
+
+    /**
+     * 查询所有的一级标题
+     *
+     * @return list
+     */
+    List<Subject> findAllParentSubject();
+
+    /**
+     * 查询对应一级标题的二级标题
+     *
+     * @param id 一级标题id
+     * @return list
+     */
+    List<Subject> findSecondSubjectById(String id);
+
+    /**
+     * 通过二级标题查询一级标题
+     *
+     * @param id 二级标题id
+     * @return subject对象
+     */
+    Subject findFirstSubjectBySecondSubjectId(String id);
+
 }

@@ -1,0 +1,13 @@
+{
+  "properties": [
+    {
+      "name": "aliyun.oss.file.accessKeyId",
+      "type": "java.lang.String",
+      "description": "阿里云的ossaccessKeyId"
+    },
+    {
+      "name": "aliyun.oss.file.endpoint",
+      "type": "java.lang.String",
+      "description": "阿里云oss的endpoint"
+    }
+  ] }

@@ -15,6 +15,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * <p>
  * 讲师 前端控制器
@@ -37,9 +39,9 @@ public class TeacherController {
 
     @ApiOperation("根据分页与特定条件查询教师列表")
     @GetMapping("/{current}/{size}")
-    public R findUser(@ApiParam(name = "current",value = "第几页", required = true) @PathVariable int current,
-            @ApiParam(name = "size",value = "页面展示数量", required = true) @PathVariable int size,
-            @ApiParam(name="teacher",value = "查询条件") TeacherQuery teacherQuery
+    public R findUser(@ApiParam(name = "current", value = "第几页", required = true) @PathVariable int current,
+                      @ApiParam(name = "size", value = "页面展示数量", required = true) @PathVariable int size,
+                      @ApiParam(name = "teacher", value = "查询条件") TeacherQuery teacherQuery
     ) {
         log.debug("获取的teacherQuery为{}", teacherQuery);
         Page<Teacher> teacherPage = new Page<>(current, size);
@@ -96,6 +98,13 @@ public class TeacherController {
             @PathVariable String id) {
         Teacher teacher = teacherService.getById(id);
         return R.ok().data("data", teacher);
+    }
+
+    @ApiOperation(value = "获取所有的教师信息")
+    @GetMapping
+    public R getAllTeacher() {
+        List<Teacher> list = teacherService.list();
+        return R.ok().data("items", list);
     }
 
 }

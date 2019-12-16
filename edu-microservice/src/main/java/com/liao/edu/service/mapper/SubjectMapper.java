@@ -12,5 +12,12 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @since 2019-11-28
  */
 public interface SubjectMapper extends BaseMapper<Subject> {
+    /**
+     * 通过二级标题id查询其所属的一级标题内容
+     *
+     * @param id 二级标题id
+     * @return subject对象
+     */
+    Subject findFirstSubjectBySecondSubjectId(String id);
 
 }
