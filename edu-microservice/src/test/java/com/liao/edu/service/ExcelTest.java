@@ -2,6 +2,7 @@ package com.liao.edu.service;
 
 import com.liao.edu.service.entity.Course;
 import com.liao.edu.service.mapper.CourseMapper;
+import com.liao.edu.service.mapper.TeacherMapper;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -16,6 +17,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * @author liao
@@ -73,10 +75,13 @@ public class ExcelTest {
 
     @Resource
     private CourseMapper courseMapper;
+
+    @Resource
+    private TeacherMapper mapper;
     @Test
     public void testMybatis(){
-        Course course = courseMapper.selectCourseById("1205369950429036545");
-        System.out.println(course);
+        List<String> list = mapper.findTeacherIdLikeName("刘");
+        System.out.println(list);
     }
 
 

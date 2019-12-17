@@ -1,21 +1,31 @@
 package com.liao.edu.service.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.liao.edu.common.constants.ResultCodeEnum;
 import com.liao.edu.common.exception.EduException;
 import com.liao.edu.service.entity.Course;
 import com.liao.edu.service.entity.CourseDescription;
+import com.liao.edu.service.entity.Teacher;
 import com.liao.edu.service.entity.form.CourseInfoForm;
+import com.liao.edu.service.entity.query.CourseQuery;
 import com.liao.edu.service.mapper.CourseDescriptionMapper;
 import com.liao.edu.service.mapper.CourseMapper;
+import com.liao.edu.service.mapper.TeacherMapper;
 import com.liao.edu.service.service.CourseDescriptionService;
 import com.liao.edu.service.service.CourseService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.liao.edu.service.service.TeacherService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -102,5 +112,40 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
             throw new EduException(ResultCodeEnum.PARAMS_PARSE_ERROR);
         }
         return courseInfoForm.getId();
+    }
+
+    @Override
+    public Map<String, Object> courseQuery(IPage<Course> page, CourseQuery courseQuery) {
+        QueryWrapper<Course> queryWrapper = null;
+        if (courseQuery != null) {
+            queryWrapper = new QueryWrapper<>();
+            String courseName = courseQuery.getCourseName();
+            String startTime = courseQuery.getStartTime();
+            String endTime = courseQuery.getEndTime();
+
+            if (!StringUtils.isEmpty(courseName)) {
+                queryWrapper.like("title", courseName);
+            }
+
+            if (!StringUtils.isEmpty(startTime)) {
+                queryWrapper.ge("gmt_create", startTime);
+            }
+
+            if (!StringUtils.isEmpty(endTime)) {
+                queryWrapper.le("gmt_create", endTime);
+            }
+
+        }
+        IPage<Map<String, Object>> pageMaps = this.pageMaps(page, queryWrapper);
+        // 获取数据总数
+        long total = pageMaps.getTotal();
+        // 获取页面数量
+        long pages = pageMaps.getPages();
+        // 获取数据
+        List<Map<String, Object>> records = pageMaps.getRecords();
+        Map<String, Object> map = new HashMap<>();
+        map.put("items", records);
+        map.put("total", total);
+        return map;
     }
 }

@@ -1,8 +1,12 @@
 package com.liao.edu.service.service;
 
-import com.liao.edu.service.entity.Course;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.liao.edu.service.entity.Course;
 import com.liao.edu.service.entity.form.CourseInfoForm;
+import com.liao.edu.service.entity.query.CourseQuery;
+
+import java.util.Map;
 
 /**
  * <p>
@@ -37,4 +41,12 @@ public interface CourseService extends IService<Course> {
      * @return 课程id
      */
     String updateCourseInfo(CourseInfoForm courseInfoForm);
+
+    /**
+     * 根据条件查询课程列表信息
+     * @param page 分页信息
+     * @param courseQuery 查询条件
+     * @return map
+     */
+    Map<String,Object> courseQuery(IPage<Course> page, CourseQuery courseQuery);
 }

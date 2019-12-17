@@ -1,15 +1,22 @@
 package com.liao.edu.service.controller;
 
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.liao.edu.common.vo.R;
+import com.liao.edu.service.entity.Course;
 import com.liao.edu.service.entity.form.CourseInfoForm;
+import com.liao.edu.service.entity.query.CourseQuery;
 import com.liao.edu.service.service.CourseService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -26,6 +33,18 @@ public class CourseController {
 
     @Resource
     private CourseService courseService;
+
+    @ApiOperation(value = "通过条件查询获取分页数据")
+    @PostMapping("/{current}/{size}")
+    public R getAllCourseInfo(@ApiParam(value = "当前页码", required = true) @PathVariable long current,
+                              @ApiParam(value = "页面展示数量", required = true) @PathVariable long size,
+                              @ApiParam(value = "查询条件", required = false) @RequestBody CourseQuery courseQuery
+    ) {
+        IPage<Course> coursePage = new Page<Course>(current, size);
+        Map<String, Object> map = courseService.courseQuery(coursePage, courseQuery);
+        return R.ok().data("data", map);
+    }
+
 
     @ApiOperation(value = "保存课程的基本信息")
     @PostMapping
@@ -47,12 +66,22 @@ public class CourseController {
 
     @ApiOperation(value = "通过id更新数据")
     @PutMapping
-    public R updateCourseInfo(@RequestBody CourseInfoForm courseInfoForm){
+    public R updateCourseInfo(@RequestBody CourseInfoForm courseInfoForm) {
         String id = courseService.updateCourseInfo(courseInfoForm);
-        if (StringUtils.isEmpty(id)){
+        if (StringUtils.isEmpty(id)) {
             return R.error();
         }
-        return R.ok().data("courseId",id);
+        return R.ok().data("courseId", id);
+    }
+
+    @ApiOperation(value = "通过id删除课程")
+    @DeleteMapping("/{id}")
+    public R deleteCourseById(@PathVariable String id) {
+        boolean b = courseService.removeById(id);
+        if (b) {
+            return R.ok();
+        }
+        return R.error();
     }
 
 }
