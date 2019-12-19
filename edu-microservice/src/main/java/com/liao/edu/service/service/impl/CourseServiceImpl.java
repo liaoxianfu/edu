@@ -9,6 +9,7 @@ import com.liao.edu.service.entity.CourseDescription;
 import com.liao.edu.service.entity.Teacher;
 import com.liao.edu.service.entity.form.CourseInfoForm;
 import com.liao.edu.service.entity.query.CourseQuery;
+import com.liao.edu.service.entity.vo.CoursePublishVo;
 import com.liao.edu.service.mapper.CourseDescriptionMapper;
 import com.liao.edu.service.mapper.CourseMapper;
 import com.liao.edu.service.mapper.TeacherMapper;
@@ -41,6 +42,9 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
 
     @Resource
     private CourseDescriptionService courseDescriptionService;
+
+    @Resource
+    private CourseMapper courseMapper;
 
 
     /**
@@ -89,7 +93,12 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
         // 属性拷贝
         BeanUtils.copyProperties(course, courseInfoForm);
         // 设置描述
-        courseInfoForm.setDescription(description.getDescription());
+        // 判断课程描述是否存在，不存在设置为空字符串
+        if (description == null) {
+            courseInfoForm.setDescription("");
+        } else {
+            courseInfoForm.setDescription(description.getDescription());
+        }
         return courseInfoForm;
     }
 
@@ -109,7 +118,11 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
         }
         boolean updateById = courseDescriptionService.updateById(description);
         if (!updateById) {
-            throw new EduException(ResultCodeEnum.PARAMS_PARSE_ERROR);
+            // 尝试新建一条数据
+            boolean save = courseDescriptionService.save(description);
+            if (!save) {
+                throw new EduException(ResultCodeEnum.PARAMS_PARSE_ERROR);
+            }
         }
         return courseInfoForm.getId();
     }
@@ -147,5 +160,10 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
         map.put("items", records);
         map.put("total", total);
         return map;
+    }
+
+    @Override
+    public CoursePublishVo getCoursePublishInfoByCourseId(String courseId) {
+        return courseMapper.selectCoursePublishVoByCourseId(courseId);
     }
 }

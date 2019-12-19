@@ -7,10 +7,12 @@ import com.liao.edu.common.vo.R;
 import com.liao.edu.service.entity.Course;
 import com.liao.edu.service.entity.form.CourseInfoForm;
 import com.liao.edu.service.entity.query.CourseQuery;
+import com.liao.edu.service.entity.vo.CoursePublishVo;
 import com.liao.edu.service.service.CourseService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,6 +30,7 @@ import java.util.Map;
  */
 @Api(description = "课程相关的操作")
 @RestController
+@Slf4j
 @RequestMapping("/admin/edu/course")
 public class CourseController {
 
@@ -49,6 +52,7 @@ public class CourseController {
     @ApiOperation(value = "保存课程的基本信息")
     @PostMapping
     public R saveCourseInfo(@RequestBody CourseInfoForm courseInfoForm) {
+        log.debug("获取到的description==={}", courseInfoForm.getDescription());
         String s = courseService.saveCourseInfo(courseInfoForm);
         if (s != null) {
             return R.ok().data("courseId", s);
@@ -78,6 +82,27 @@ public class CourseController {
     @DeleteMapping("/{id}")
     public R deleteCourseById(@PathVariable String id) {
         boolean b = courseService.removeById(id);
+        if (b) {
+            return R.ok();
+        }
+        return R.error();
+    }
+
+
+    @ApiOperation(value = "通过课程id获取发布的概览信息")
+    @GetMapping("/publish/{id}")
+    public R getPublishInfo(@PathVariable String id) {
+        CoursePublishVo info = courseService.getCoursePublishInfoByCourseId(id);
+        return R.ok().data("data", info);
+    }
+
+    @ApiOperation(value = "发布课程")
+    @PostMapping("/publish")
+    public R publishCourse(String courseId) {
+        Course course = new Course();
+        course.setId(courseId);
+        course.setStatus(Course.COURSE_NORMAL);
+        boolean b = courseService.updateById(course);
         if (b) {
             return R.ok();
         }

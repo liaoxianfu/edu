@@ -1,14 +1,22 @@
 package com.liao.edu.oss.controller;
 
+import com.liao.edu.common.constants.ResultCodeEnum;
 import com.liao.edu.common.vo.R;
 import com.liao.edu.oss.service.OssService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author liao
@@ -16,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
  */
 @Api("阿里云oss文件上传")
 @RestController
+@Slf4j
 @RequestMapping("/admin/oss/file")
 public class OssController {
 
@@ -36,5 +45,4 @@ public class OssController {
             return R.error().message("文件上传失败");
         }
     }
-
 }

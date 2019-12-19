@@ -2,6 +2,9 @@ package com.liao.edu.service.service;
 
 import com.liao.edu.service.entity.Chapter;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.liao.edu.service.entity.vo.ChapterVo;
+
+import java.util.List;
 
 /**
  * <p>
@@ -12,5 +15,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2019-11-28
  */
 public interface ChapterService extends IService<Chapter> {
+    List<ChapterVo> findChapterVoByCourseId(String courseId);
 
 }

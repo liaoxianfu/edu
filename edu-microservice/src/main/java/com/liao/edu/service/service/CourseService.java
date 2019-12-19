@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.liao.edu.service.entity.Course;
 import com.liao.edu.service.entity.form.CourseInfoForm;
 import com.liao.edu.service.entity.query.CourseQuery;
+import com.liao.edu.service.entity.vo.CoursePublishVo;
 
 import java.util.Map;
 
@@ -49,4 +50,11 @@ public interface CourseService extends IService<Course> {
      * @return map
      */
     Map<String,Object> courseQuery(IPage<Course> page, CourseQuery courseQuery);
+
+    /**
+     * 根据课程id查询发布的课程信息
+     * @param courseId 课程id
+     * @return CoursePublishVo
+     */
+    CoursePublishVo getCoursePublishInfoByCourseId(String courseId);
 }
