@@ -46,6 +46,9 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
     @Resource
     private CourseMapper courseMapper;
 
+    @Resource
+    private TeacherMapper teacherMapper;
+
 
     /**
      * 保存课程基本信息
@@ -133,11 +136,18 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
         if (courseQuery != null) {
             queryWrapper = new QueryWrapper<>();
             String courseName = courseQuery.getCourseName();
+            String teacherName = courseQuery.getTeacherName();
             String startTime = courseQuery.getStartTime();
             String endTime = courseQuery.getEndTime();
 
             if (!StringUtils.isEmpty(courseName)) {
                 queryWrapper.like("title", courseName);
+            }
+
+            if (!StringUtils.isEmpty(teacherName)){
+                // 查询出所有符合条件的id
+                List<String> teacherIdList = teacherMapper.findTeacherIdLikeName(teacherName);
+                queryWrapper.in("teacher_id",teacherIdList);
             }
 
             if (!StringUtils.isEmpty(startTime)) {

@@ -6,6 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="edu-minio-video" />
         <module name="edu-common" />
         <module name="edu-aliyunOSS" />
         <module name="edu-microservice" />
@@ -13,15 +14,18 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="demo" target="1.5" />
+      <module name="edu-aliyun-video" target="1.8" />
       <module name="edu-parent" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="demo" options="" />
+      <module name="edu-aliyun-video" options="-parameters" />
       <module name="edu-aliyunOSS" options="-parameters" />
       <module name="edu-common" options="-parameters" />
       <module name="edu-microservice" options="-parameters" />
+      <module name="edu-minio-video" options="-parameters" />
     </option>
   </component>
 </project>

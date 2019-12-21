@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -69,5 +70,15 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
         map.put("data", mapsPage.getRecords());
         map.put("total", mapsPage.getTotal());
         return R.ok().data(map);
+    }
+
+    @Override
+    public Map<String, String> getAllTeacherMap() {
+        List<Teacher> list = this.list();
+        Map<String, String> teacherMap = new HashMap<>();
+        list.forEach(teacher -> {
+            teacherMap.put(teacher.getId(), teacher.getName());
+        });
+        return teacherMap;
     }
 }

@@ -6,6 +6,8 @@ import com.liao.edu.service.entity.Teacher;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.liao.edu.service.entity.query.TeacherQuery;
 
+import java.util.Map;
+
 /**
  * <p>
  * 讲师 服务类
@@ -23,4 +25,10 @@ public interface TeacherService extends IService<Teacher> {
      * @return 同意状态码返回
      */
     R teacherQuery(Page<Teacher> page, TeacherQuery teacherQuery);
+
+    /**
+     * 获取所有的教师信息 通过马屁、返回给前端
+     * @return map
+     */
+    Map<String,String> getAllTeacherMap();
 }

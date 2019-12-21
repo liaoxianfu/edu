@@ -1,6 +1,7 @@
 package com.liao.edu.service;
 
 import com.liao.edu.service.entity.Course;
+import com.liao.edu.service.entity.vo.CoursePublishVo;
 import com.liao.edu.service.mapper.CourseMapper;
 import com.liao.edu.service.mapper.TeacherMapper;
 import org.apache.poi.hssf.usermodel.HSSFCell;
@@ -80,8 +81,10 @@ public class ExcelTest {
     private TeacherMapper mapper;
     @Test
     public void testMybatis(){
-        List<String> list = mapper.findTeacherIdLikeName("刘");
-        System.out.println(list);
+//        List<String> list = mapper.findTeacherIdLikeName("刘");
+//        System.out.println(list);
+        CoursePublishVo coursePublishVo = courseMapper.selectCoursePublishVoByCourseId("18");
+        System.out.println(coursePublishVo);
     }
 
 

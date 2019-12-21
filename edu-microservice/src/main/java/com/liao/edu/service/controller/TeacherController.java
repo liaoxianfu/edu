@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -107,5 +108,11 @@ public class TeacherController {
         return R.ok().data("items", list);
     }
 
+    @ApiOperation(value = "将教师的id与name封装成map返回给前端")
+    @GetMapping("/map")
+    public R getTeacherMap() {
+        Map<String, String> map = teacherService.getAllTeacherMap();
+        return R.ok().data("data", map);
+    }
 }
 
