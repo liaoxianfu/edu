@@ -7,9 +7,9 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="edu-minio-video" />
-        <module name="edu-common" />
-        <module name="edu-aliyunOSS" />
         <module name="edu-microservice" />
+        <module name="edu-aliyunOSS" />
+        <module name="edu-common" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

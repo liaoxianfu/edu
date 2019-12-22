@@ -16,6 +16,7 @@ public enum ResultCodeEnum {
     SAVE_ERROR(false, 21004, "保存到数据库失败"),
     UPLOAD_ERROR(false,21005,"上传文件出错,请重新上传"),
     DELETE_FILE_ERROR(false,21006,"删除文件出错"),
+    DOWNLOAD_FILE_ERROR(false,21007,"下载文件出错"),
     UNKNOWN_REASON(false, 20001, "未知错误");
 
     private Boolean success;

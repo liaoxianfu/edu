@@ -9,6 +9,7 @@ import com.liao.edu.video.service.EduResourceService;
 import com.liao.edu.video.util.MinioClientPropertiesUtil;
 import io.minio.MinioClient;
 import io.minio.errors.*;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -85,6 +86,48 @@ public class EduResourceServiceImpl extends ServiceImpl<EduResourceMapper, EduRe
         String videoUrl = eduResource.getVideoUrl();
         String[] split = videoUrl.split("/");
         return split[split.length - 1];
+    }
+
+    @Override
+    public InputStream getFileObjectById(String id) {
+        // 先获取eduSource
+        EduResource eduResource = this.getById(id);
+        String videoUrl = eduResource.getVideoUrl();
+        // 如果获取的videoURL不为空
+        if (!StringUtils.isEmpty(videoUrl)) {
+            String[] split = videoUrl.split("/");
+            String bucket = split[0];
+            String fileName = videoUrl.replace(bucket + "/", "");
+            try {
+                return minioClient.getObject(bucket, fileName);
+            } catch (Exception e) {
+                // 获取报错信息
+                log.error(e.getMessage());
+                throw new EduException(ResultCodeEnum.UNKNOWN_REASON);
+            }
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public InputStream getFileObject(EduResource eduResource) {
+        String videoUrl = eduResource.getVideoUrl();
+        // 如果获取的videoURL不为空
+        if (!StringUtils.isEmpty(videoUrl)) {
+            String[] split = videoUrl.split("/");
+            String bucket = split[0];
+            String fileName = videoUrl.replace(bucket + "/", "");
+            try {
+                return minioClient.getObject(bucket, fileName);
+            } catch (Exception e) {
+                // 获取报错信息
+                log.error(e.getMessage());
+                throw new EduException(ResultCodeEnum.UNKNOWN_REASON);
+            }
+        } else {
+            return null;
+        }
     }
 }
 

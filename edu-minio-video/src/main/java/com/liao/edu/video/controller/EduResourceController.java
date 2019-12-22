@@ -1,16 +1,24 @@
 package com.liao.edu.video.controller;
 
 
+import com.liao.edu.common.constants.ResultCodeEnum;
+import com.liao.edu.common.exception.EduException;
 import com.liao.edu.common.vo.R;
 import com.liao.edu.video.entity.EduResource;
 import com.liao.edu.video.service.EduResourceService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 /**
  * <p>
@@ -22,6 +30,7 @@ import org.springframework.web.multipart.MultipartFile;
  */
 
 @Api(description = "Minio文件存储")
+@Slf4j
 @RestController
 @RequestMapping("/edu/edu-resource")
 public class EduResourceController {
@@ -73,6 +82,33 @@ public class EduResourceController {
         return R.ok().data("name", name);
     }
 
-
+    @ApiOperation(value = "通过文件id获取视频的文件")
+    @GetMapping("/video/file/{id}")
+    public void getVideoFileByName(@PathVariable String id, HttpServletResponse response) {
+        // 通过id获取文件对象
+        EduResource eduResource = eduResourceService.getById(id);
+        // 定义文件缓存
+        byte[] buffer = new byte[1024];
+        //输出流
+        OutputStream os = null;
+        // 获取名称
+        String[] split = eduResource.getVideoUrl().split("/");
+        String fileName = split[split.length - 1];
+        try {
+            response.setHeader("Content-Disposition", "attachment;filename=" + fileName);
+            os = response.getOutputStream();
+            InputStream inputStream = eduResourceService.getFileObject(eduResource);
+            int i = inputStream.read(buffer);
+            while (i > 0) {
+                os.write(buffer, 0, i);
+                i = inputStream.read(buffer);
+            }
+            inputStream.close();
+            os.close();
+        } catch (IOException e) {
+            log.error(e.getMessage());
+            throw new EduException(ResultCodeEnum.DOWNLOAD_FILE_ERROR);
+        }
+    }
 }
 
