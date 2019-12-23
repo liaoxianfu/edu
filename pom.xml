@@ -18,8 +18,7 @@
     <modules>
         <module>edu-microservice</module>
         <module>edu-common</module>
-        <module>edu-aliyunOSS</module>
-        <module>edu-aliyun-video</module>
+        <module>edu-aliyun-oss</module>
         <module>edu-minio-video</module>
     </modules>
 

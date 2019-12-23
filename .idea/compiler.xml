@@ -8,7 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="edu-minio-video" />
         <module name="edu-microservice" />
-        <module name="edu-aliyunOSS" />
+        <module name="edu-aliyun-oss" />
         <module name="edu-common" />
       </profile>
     </annotationProcessing>
@@ -21,8 +21,8 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="demo" options="" />
+      <module name="edu-aliyun-oss" options="-parameters" />
       <module name="edu-aliyun-video" options="-parameters" />
-      <module name="edu-aliyunOSS" options="-parameters" />
       <module name="edu-common" options="-parameters" />
       <module name="edu-microservice" options="-parameters" />
       <module name="edu-minio-video" options="-parameters" />
