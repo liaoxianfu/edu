@@ -6,11 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="edu-aliyun-oss" />
-        <module name="edu-common" />
-        <module name="edu-eureka" />
-        <module name="edu-minio-video" />
         <module name="edu-microservice" />
+        <module name="edu-minio-video-web" />
+        <module name="edu-common" />
+        <module name="edu-aliyun-oss" />
+        <module name="edu-minio-video" />
+        <module name="edu-eureka" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -28,6 +29,7 @@
       <module name="edu-eureka" options="-parameters" />
       <module name="edu-microservice" options="-parameters" />
       <module name="edu-minio-video" options="-parameters" />
+      <module name="edu-minio-video-web" options="-parameters" />
     </option>
   </component>
 </project>

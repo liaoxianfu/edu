@@ -21,6 +21,7 @@
         <module>edu-aliyun-oss</module>
         <module>edu-minio-video</module>
         <module>edu-eureka</module>
+        <module>edu-minio-video-web</module>
     </modules>
 
     <properties>
