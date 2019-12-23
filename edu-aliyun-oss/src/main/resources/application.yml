@@ -17,3 +17,8 @@ aliyun:
       accessKeyId: LTAI4FtxWtr8qX1yTi2xjPKR
       accessKeySecret: w0qA36wu5SiLX9BAmITyC0l8BbDEVe
       bucket: edu-01
+# 配置注册中心的地址
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:9001/eureka/

@@ -2,7 +2,7 @@ server:
   port: 8201
 spring:
   application:
-    name: edu-microservice
+    name: edu-minio-video
   profiles:
     active: dev
   datasource:
@@ -48,3 +48,9 @@ minio:
     videoPath: video
     imgPath: img
     otherPath: other
+
+# 配置注册中心的地址
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:9001/eureka/

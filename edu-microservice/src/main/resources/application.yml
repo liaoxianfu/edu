@@ -34,4 +34,8 @@ logging:
   file:
     path: /log/edu
 
-
+# 配置注册中心的地址
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:9001/eureka/

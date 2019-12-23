@@ -9,49 +9,34 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>edu-aliyun-oss</artifactId>
+    <artifactId>edu-eureka</artifactId>
+
     <dependencies>
-        <dependency>
-            <!--eureka-->
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.liao</groupId>
-            <artifactId>edu-common</artifactId>
-            <version>${edu.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.aliyun.oss</groupId>
-            <artifactId>aliyun-sdk-oss</artifactId>
-            <version>${aliyun.oss.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
+        <!-- Spring Boot Begin -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
         </dependency>
+        <!-- Spring Boot End -->
+
+        <!-- Spring Cloud Begin -->
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
         </dependency>
+        <!-- Spring Cloud End -->
     </dependencies>
-
-
     <build>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.liao.edu.oss.OssApplication</mainClass>
+                    <mainClass>com.liao.edu.eureka.EurekaApplication</mainClass>
                 </configuration>
             </plugin>
         </plugins>
     </build>
 
 </project>
-
