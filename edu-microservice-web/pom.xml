@@ -9,7 +9,8 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>edu-minio-video-web</artifactId>
+    <artifactId>edu-microservice-web</artifactId>
+
     <dependencies>
         <!-- Spring Boot Begin -->
         <dependency>
@@ -66,10 +67,12 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.liao.edu.video.feign.VideoFeignApplication</mainClass>
+                    <mainClass>com.liao.edu.service.feign.EduMicroServiceFeignApplication</mainClass>
                 </configuration>
             </plugin>
         </plugins>
     </build>
+
+
 
 </project>

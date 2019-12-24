@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: edu-zuul
+
+server:
+  port: 9101
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:9001/eureka/
+
+zuul:
+  routes:
+    api-video:
+      path: /api/video/**
+      serviceId: edu-minio-video-web
+    api-oss:
+      path: /api/oss/**
+      serviceId: edu-aliyun-oss-web

@@ -1,12 +1,15 @@
 package com.liao.edu.video.feign.service;
 
 import com.liao.edu.common.vo.R;
+import feign.Response;
 import feign.form.spring.SpringFormEncoder;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author liao
@@ -26,8 +29,14 @@ public interface EduResourceFeignService {
 
 
     @PostMapping(value = "/video", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public R uploadFile(@RequestParam String courseId, @RequestPart MultipartFile file);
+    R uploadFile(@RequestParam String courseId, @RequestPart MultipartFile file);
 
     @DeleteMapping("/video/{courseId}")
-    public R deleteFile(@PathVariable String courseId);
+    R deleteFile(@PathVariable String courseId);
+
+    @GetMapping("/video/{id}")
+    R getVideoNameById(@PathVariable String id);
+
+    @GetMapping("/video/file/{id}")
+    Response getVideoFileByName(@PathVariable String id);
 }

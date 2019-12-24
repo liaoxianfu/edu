@@ -1,0 +1,19 @@
+server:
+  port: 8051
+
+spring:
+  application:
+    name: edu-aliyun-oss-web
+  servlet:
+    multipart:
+      max-file-size: 1024MB
+      max-request-size: 1024MB
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:9001/eureka/
+feign:
+  hystrix:
+    enabled: true
+
+

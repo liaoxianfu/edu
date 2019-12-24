@@ -8,6 +8,9 @@
         <outputRelativeToContentRoot value="true" />
         <module name="edu-microservice" />
         <module name="edu-minio-video-web" />
+        <module name="edu-aliyun-oss-web" />
+        <module name="edu-microservice-web" />
+        <module name="edu-zuul" />
         <module name="edu-common" />
         <module name="edu-aliyun-oss" />
         <module name="edu-minio-video" />
@@ -24,12 +27,15 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="demo" options="" />
       <module name="edu-aliyun-oss" options="-parameters" />
+      <module name="edu-aliyun-oss-web" options="-parameters" />
       <module name="edu-aliyun-video" options="-parameters" />
       <module name="edu-common" options="-parameters" />
       <module name="edu-eureka" options="-parameters" />
       <module name="edu-microservice" options="-parameters" />
+      <module name="edu-microservice-web" options="-parameters" />
       <module name="edu-minio-video" options="-parameters" />
       <module name="edu-minio-video-web" options="-parameters" />
+      <module name="edu-zuul" options="-parameters" />
     </option>
   </component>
 </project>

@@ -22,6 +22,9 @@
         <module>edu-minio-video</module>
         <module>edu-eureka</module>
         <module>edu-minio-video-web</module>
+        <module>edu-zuul</module>
+        <module>edu-aliyun-oss-web</module>
+        <module>edu-microservice-web</module>
     </modules>
 
     <properties>
