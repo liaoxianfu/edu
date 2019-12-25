@@ -24,7 +24,7 @@ public class Swagger2Config {
                 .apiInfo(apiInfo())
                 .select()
                 ////为当前包路径
-                .apis(RequestHandlerSelectors.basePackage("com.liao.edu"))
+                .apis(RequestHandlerSelectors.basePackage("com.liao.edu.oss.feign.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }

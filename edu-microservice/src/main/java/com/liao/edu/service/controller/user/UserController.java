@@ -1,4 +1,4 @@
-package com.liao.edu.service.controller;
+package com.liao.edu.service.controller.user;
 
 import com.liao.edu.common.vo.R;
 import com.liao.edu.service.entity.User;

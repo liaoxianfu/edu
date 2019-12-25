@@ -1,8 +1,8 @@
-package com.liao.edu.service.feign.controller;
+package com.liao.edu.service.feign.controller.user;
 
 import com.liao.edu.common.entity.User;
 import com.liao.edu.common.vo.R;
-import com.liao.edu.service.feign.service.UserFeignService;
+import com.liao.edu.service.feign.service.user.UserFeignService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -23,7 +23,7 @@ public class UserFeignController {
     }
 
     @GetMapping("/info")
-    public R info(String token) {
+    public R info(@RequestParam String token) {
         return service.info(token);
     }
 

@@ -1,8 +1,8 @@
-package com.liao.edu.service.feign.controller;
+package com.liao.edu.service.feign.controller.chapter;
 
 import com.liao.edu.common.entity.Chapter;
 import com.liao.edu.common.vo.R;
-import com.liao.edu.service.feign.service.ChapterFeignService;
+import com.liao.edu.service.feign.service.chapter.ChapterFeignService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;

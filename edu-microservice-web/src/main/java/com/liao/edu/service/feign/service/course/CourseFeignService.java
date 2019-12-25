@@ -1,4 +1,4 @@
-package com.liao.edu.service.feign.service;
+package com.liao.edu.service.feign.service.course;
 
 import com.liao.edu.common.entity.form.CourseInfoForm;
 import com.liao.edu.common.entity.query.CourseQuery;
@@ -33,5 +33,5 @@ public interface CourseFeignService {
     R getPublishInfo(@PathVariable String id);
 
     @PostMapping("/publish")
-    R publishCourse(String courseId);
+    R publishCourse(@RequestParam String courseId);
 }

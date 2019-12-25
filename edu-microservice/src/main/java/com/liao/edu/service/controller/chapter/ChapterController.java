@@ -1,4 +1,4 @@
-package com.liao.edu.service.controller;
+package com.liao.edu.service.controller.chapter;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;

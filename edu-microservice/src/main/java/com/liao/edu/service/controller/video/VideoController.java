@@ -1,4 +1,4 @@
-package com.liao.edu.service.controller;
+package com.liao.edu.service.controller.video;
 
 
 import com.liao.edu.common.vo.R;

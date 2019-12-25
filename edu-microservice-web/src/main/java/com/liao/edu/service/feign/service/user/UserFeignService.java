@@ -1,12 +1,9 @@
-package com.liao.edu.service.feign.service;
+package com.liao.edu.service.feign.service.user;
 
 import com.liao.edu.common.entity.User;
 import com.liao.edu.common.vo.R;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author liao
@@ -20,7 +17,7 @@ public interface UserFeignService {
     public R login(@RequestBody User user);
 
     @GetMapping("/info")
-    public R info(String token);
+    public R info(@RequestParam String token);
 
     @PostMapping("/logout")
     public R logout();

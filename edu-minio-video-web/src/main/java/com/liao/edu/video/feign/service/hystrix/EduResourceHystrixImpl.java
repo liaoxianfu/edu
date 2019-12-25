@@ -10,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
  * @author liao
  * @since 2019/12/24 14:33
  */
-@Component
+
 public class EduResourceHystrixImpl implements EduResourceFeignService {
     public R errorInfo() {
         return R.error().data("info", "数据不可用");

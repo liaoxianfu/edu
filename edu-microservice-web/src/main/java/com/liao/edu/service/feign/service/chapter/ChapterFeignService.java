@@ -1,4 +1,4 @@
-package com.liao.edu.service.feign.service;
+package com.liao.edu.service.feign.service.chapter;
 
 import com.liao.edu.common.entity.Chapter;
 import com.liao.edu.common.vo.R;

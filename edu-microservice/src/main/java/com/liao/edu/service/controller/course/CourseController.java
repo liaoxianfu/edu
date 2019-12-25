@@ -1,4 +1,4 @@
-package com.liao.edu.service.controller;
+package com.liao.edu.service.controller.course;
 
 
 import com.baomidou.mybatisplus.core.metadata.IPage;

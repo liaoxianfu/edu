@@ -133,6 +133,8 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
     @Override
     public Map<String, Object> courseQuery(IPage<Course> page, CourseQuery courseQuery) {
         QueryWrapper<Course> queryWrapper = null;
+        // 存放返回的信息
+        Map<String, Object> map = new HashMap<>(2);
         if (courseQuery != null) {
             queryWrapper = new QueryWrapper<>();
             String courseName = courseQuery.getCourseName();
@@ -147,6 +149,12 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
             if (!StringUtils.isEmpty(teacherName)){
                 // 查询出所有符合条件的id
                 List<String> teacherIdList = teacherMapper.findTeacherIdLikeName(teacherName);
+                // 判断查询数据不存在的情况
+                if (teacherIdList.size()<=0){
+                    map.put("items", null);
+                    map.put("total", 0);
+                    return map;
+                }
                 queryWrapper.in("teacher_id",teacherIdList);
             }
 
@@ -166,7 +174,7 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
         long pages = pageMaps.getPages();
         // 获取数据
         List<Map<String, Object>> records = pageMaps.getRecords();
-        Map<String, Object> map = new HashMap<>();
+
         map.put("items", records);
         map.put("total", total);
         return map;

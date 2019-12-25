@@ -1,4 +1,4 @@
-package com.liao.edu.service.feign.service;
+package com.liao.edu.service.feign.service.teacher;
 
 import com.liao.edu.common.entity.Teacher;
 import com.liao.edu.common.entity.query.TeacherQuery;
@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.*;
 @FeignClient(value = "edu-microservice")
 @RequestMapping("/admin/edu/teacher")
 public interface TeacherFeignService {
-    @GetMapping("/{current}/{size}")
-    public R findUser(@PathVariable int current, @PathVariable int size, TeacherQuery teacherQuery);
+    @PostMapping("/{current}/{size}")
+    public R findUser(@PathVariable int current, @PathVariable int size,@RequestBody TeacherQuery teacherQuery);
 
     @DeleteMapping("/{id}")
     public R deleteUserById(@PathVariable String id);

@@ -1,9 +1,9 @@
-package com.liao.edu.service.feign.controller;
+package com.liao.edu.service.feign.controller.course;
 
 import com.liao.edu.common.entity.form.CourseInfoForm;
 import com.liao.edu.common.entity.query.CourseQuery;
 import com.liao.edu.common.vo.R;
-import com.liao.edu.service.feign.service.CourseFeignService;
+import com.liao.edu.service.feign.service.course.CourseFeignService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -17,7 +17,7 @@ import javax.annotation.Resource;
  */
 @Api(description = "课程相关的操作")
 @RestController
-@RequestMapping("/admin/edu/course")
+@RequestMapping("/v1/admin/edu/course")
 public class CourseFeignController {
     @Resource
     private CourseFeignService service;
@@ -64,7 +64,7 @@ public class CourseFeignController {
 
     @ApiOperation(value = "发布课程")
     @PostMapping("/publish")
-    public R publishCourse(String courseId) {
+    public R publishCourse(@RequestParam String courseId) {
         return service.publishCourse(courseId);
     }
 }

@@ -1,4 +1,4 @@
-package com.liao.edu.service.controller;
+package com.liao.edu.service.controller.teacher;
 
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -39,10 +39,10 @@ public class TeacherController {
     }
 
     @ApiOperation("根据分页与特定条件查询教师列表")
-    @GetMapping("/{current}/{size}")
+    @PostMapping("/{current}/{size}")
     public R findUser(@ApiParam(name = "current", value = "第几页", required = true) @PathVariable int current,
                       @ApiParam(name = "size", value = "页面展示数量", required = true) @PathVariable int size,
-                      @ApiParam(name = "teacher", value = "查询条件") TeacherQuery teacherQuery
+                      @ApiParam(name = "teacher", value = "查询条件")@RequestBody TeacherQuery teacherQuery
     ) {
         log.debug("获取的teacherQuery为{}", teacherQuery);
         Page<Teacher> teacherPage = new Page<>(current, size);

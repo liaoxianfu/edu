@@ -1,4 +1,4 @@
-package com.liao.edu.service.feign.service;
+package com.liao.edu.service.feign.service.video;
 
 import com.liao.edu.common.entity.Video;
 import com.liao.edu.common.vo.R;

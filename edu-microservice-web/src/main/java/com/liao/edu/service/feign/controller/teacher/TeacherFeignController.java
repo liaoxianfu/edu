@@ -1,12 +1,13 @@
-package com.liao.edu.service.feign.controller;
+package com.liao.edu.service.feign.controller.teacher;
 
 import com.liao.edu.common.entity.Teacher;
 import com.liao.edu.common.entity.query.TeacherQuery;
 import com.liao.edu.common.vo.R;
-import com.liao.edu.service.feign.service.TeacherFeignService;
+import com.liao.edu.service.feign.service.teacher.TeacherFeignService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -23,10 +24,10 @@ public class TeacherFeignController {
     private TeacherFeignService service;
 
     @ApiOperation("根据分页与特定条件查询教师列表")
-    @GetMapping("/{current}/{size}")
+    @PostMapping(value = "/{current}/{size}")
     public R findUser(@ApiParam(name = "current", value = "第几页", required = true) @PathVariable int current,
                       @ApiParam(name = "size", value = "页面展示数量", required = true) @PathVariable int size,
-                      @ApiParam(name = "teacher", value = "查询条件") TeacherQuery teacherQuery) {
+                      @ApiParam(name = "teacher", value = "查询条件") @RequestBody TeacherQuery teacherQuery) {
         return service.findUser(current, size, teacherQuery);
     }
 

@@ -20,4 +20,4 @@ zuul:
       serviceId: edu-aliyun-oss-web
     api-microservice:
       path: /api/edu/**
-      serviceId: edu-microservice
+      serviceId: edu-microservice-web

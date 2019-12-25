@@ -1,8 +1,8 @@
-package com.liao.edu.service.feign.controller;
+package com.liao.edu.service.feign.controller.video;
 
 import com.liao.edu.common.entity.Video;
 import com.liao.edu.common.vo.R;
-import com.liao.edu.service.feign.service.VideoFeignService;
+import com.liao.edu.service.feign.service.video.VideoFeignService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.*;

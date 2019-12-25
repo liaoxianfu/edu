@@ -1,8 +1,8 @@
-package com.liao.edu.service.feign.controller;
+package com.liao.edu.service.feign.controller.subject;
 
 import com.liao.edu.common.entity.Subject;
 import com.liao.edu.common.vo.R;
-import com.liao.edu.service.feign.service.SubjectFeignService;
+import com.liao.edu.service.feign.service.subject.SubjectFeignService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.http.MediaType;
