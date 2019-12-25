@@ -36,7 +36,7 @@ public class SubjectController {
     @PostMapping("/import")
     public R batchAddSub(
             @ApiParam(name = "file", value = "Excel文件", required = true)
-            @RequestParam("file") MultipartFile file) throws Exception {
+            @RequestParam("file") MultipartFile file) {
 
         List<String> msg = subjectService.batchImportByExcelFile(file);
         if (msg.size() == 0) {
