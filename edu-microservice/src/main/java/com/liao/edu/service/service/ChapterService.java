@@ -1,8 +1,8 @@
 package com.liao.edu.service.service;
 
-import com.liao.edu.service.entity.Chapter;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.liao.edu.service.entity.vo.ChapterVo;
+import com.liao.edu.common.entity.Chapter;
+import com.liao.edu.common.entity.vo.ChapterVo;
 
 import java.util.List;
 

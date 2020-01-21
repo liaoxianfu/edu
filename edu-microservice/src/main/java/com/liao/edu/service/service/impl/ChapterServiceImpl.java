@@ -1,14 +1,14 @@
 package com.liao.edu.service.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.liao.edu.service.entity.Chapter;
-import com.liao.edu.service.entity.Video;
-import com.liao.edu.service.entity.vo.ChapterVo;
-import com.liao.edu.service.entity.vo.VideoVo;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.liao.edu.common.entity.Chapter;
+import com.liao.edu.common.entity.Video;
+import com.liao.edu.common.entity.vo.ChapterVo;
+import com.liao.edu.common.entity.vo.VideoVo;
 import com.liao.edu.service.mapper.ChapterMapper;
 import com.liao.edu.service.mapper.VideoMapper;
 import com.liao.edu.service.service.ChapterService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;

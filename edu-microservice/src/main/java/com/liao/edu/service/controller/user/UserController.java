@@ -1,7 +1,7 @@
 package com.liao.edu.service.controller.user;
 
+import com.liao.edu.common.entity.User;
 import com.liao.edu.common.vo.R;
-import com.liao.edu.service.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 

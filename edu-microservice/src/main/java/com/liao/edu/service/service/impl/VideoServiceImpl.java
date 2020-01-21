@@ -1,9 +1,9 @@
 package com.liao.edu.service.service.impl;
 
-import com.liao.edu.service.entity.Video;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.liao.edu.common.entity.Video;
 import com.liao.edu.service.mapper.VideoMapper;
 import com.liao.edu.service.service.VideoService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**

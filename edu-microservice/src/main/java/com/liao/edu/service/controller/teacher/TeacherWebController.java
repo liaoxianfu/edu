@@ -1,9 +1,8 @@
 package com.liao.edu.service.controller.teacher;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.liao.edu.common.entity.Teacher;
 import com.liao.edu.common.vo.R;
-import com.liao.edu.service.entity.Teacher;
 import com.liao.edu.service.service.TeacherService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

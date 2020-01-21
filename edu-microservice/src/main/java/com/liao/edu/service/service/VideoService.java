@@ -1,7 +1,7 @@
 package com.liao.edu.service.service;
 
-import com.liao.edu.service.entity.Video;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.liao.edu.common.entity.Video;
 
 /**
  * <p>

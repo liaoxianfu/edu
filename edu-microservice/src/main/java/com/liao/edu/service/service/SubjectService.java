@@ -1,8 +1,8 @@
 package com.liao.edu.service.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.liao.edu.common.entity.Subject;
 import com.liao.edu.common.vo.SubjectVo;
-import com.liao.edu.service.entity.Subject;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;

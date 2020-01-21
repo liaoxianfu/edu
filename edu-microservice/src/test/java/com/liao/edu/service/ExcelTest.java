@@ -1,7 +1,6 @@
 package com.liao.edu.service;
 
-import com.liao.edu.service.entity.Course;
-import com.liao.edu.service.entity.vo.CoursePublishVo;
+import com.liao.edu.common.entity.vo.CoursePublishVo;
 import com.liao.edu.service.mapper.CourseMapper;
 import com.liao.edu.service.mapper.TeacherMapper;
 import org.apache.poi.hssf.usermodel.HSSFCell;
@@ -17,8 +16,6 @@ import javax.annotation.Resource;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.util.List;
 
 /**
  * @author liao

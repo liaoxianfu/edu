@@ -1,11 +1,8 @@
 package com.liao.edu.service.mapper;
 
-import com.liao.edu.service.entity.Course;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.liao.edu.service.entity.vo.CoursePublishVo;
-import org.apache.ibatis.annotations.Select;
-
-import java.util.List;
+import com.liao.edu.common.entity.Course;
+import com.liao.edu.common.entity.vo.CoursePublishVo;
 
 /**
  * <p>

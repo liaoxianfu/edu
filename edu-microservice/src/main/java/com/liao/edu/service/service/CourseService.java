@@ -2,10 +2,10 @@ package com.liao.edu.service.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.liao.edu.service.entity.Course;
-import com.liao.edu.service.entity.form.CourseInfoForm;
-import com.liao.edu.service.entity.query.CourseQuery;
-import com.liao.edu.service.entity.vo.CoursePublishVo;
+import com.liao.edu.common.entity.Course;
+import com.liao.edu.common.entity.form.CourseInfoForm;
+import com.liao.edu.common.entity.query.CourseQuery;
+import com.liao.edu.common.entity.vo.CoursePublishVo;
 
 import java.util.Map;
 

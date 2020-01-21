@@ -1,7 +1,8 @@
 package com.liao.edu.service.mapper;
 
-import com.liao.edu.service.entity.Teacher;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.liao.edu.common.entity.Teacher;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -14,5 +15,5 @@ import java.util.List;
  * @since 2019-11-28
  */
 public interface TeacherMapper extends BaseMapper<Teacher> {
-    List<String> findTeacherIdLikeName(String name);
+    List<String> findTeacherIdLikeName(@Param("name") String name);
 }

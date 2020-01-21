@@ -1,10 +1,10 @@
 package com.liao.edu.service.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.liao.edu.common.vo.R;
-import com.liao.edu.service.entity.Teacher;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.liao.edu.service.entity.query.TeacherQuery;
+import com.liao.edu.common.entity.Teacher;
+import com.liao.edu.common.entity.query.TeacherQuery;
+import com.liao.edu.common.vo.R;
 
 import java.util.Map;
 

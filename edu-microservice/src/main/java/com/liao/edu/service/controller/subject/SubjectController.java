@@ -1,15 +1,14 @@
 package com.liao.edu.service.controller.subject;
 
 
+import com.liao.edu.common.entity.Subject;
 import com.liao.edu.common.vo.R;
 import com.liao.edu.common.vo.SubjectVo;
-import com.liao.edu.service.entity.Subject;
 import com.liao.edu.service.service.SubjectService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.*;
-
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;

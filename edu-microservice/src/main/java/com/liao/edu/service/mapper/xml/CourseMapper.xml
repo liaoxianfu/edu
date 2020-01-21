@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.liao.edu.service.mapper.CourseMapper">
-    <select id="selectCourseById" parameterType="String" resultType="com.liao.edu.service.entity.Course">
+    <select id="selectCourseById" parameterType="String" resultType="com.liao.edu.common.entity.Course">
         select id, teacher_id, subject_id, title, price, lesson_num, cover, buy_count, view_count, version, status,
         gmt_create, gmt_modified
         from edu_course
@@ -10,7 +10,7 @@
 
 
 
-    <select id="selectCoursePublishVoByCourseId" resultType="com.liao.edu.service.entity.vo.CoursePublishVo">
+    <select id="selectCoursePublishVoByCourseId" resultType="com.liao.edu.common.entity.vo.CoursePublishVo">
         SELECT
         c.title,
         CONVERT(c.price, DECIMAL(8,2)) as price,

@@ -1,8 +1,8 @@
 package com.liao.edu.service.controller.video;
 
 
+import com.liao.edu.common.entity.Video;
 import com.liao.edu.common.vo.R;
-import com.liao.edu.service.entity.Video;
 import com.liao.edu.service.service.VideoService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;

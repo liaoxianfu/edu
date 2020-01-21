@@ -1,9 +1,9 @@
 package com.liao.edu.service.service.impl;
 
-import com.liao.edu.service.entity.CourseDescription;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.liao.edu.common.entity.CourseDescription;
 import com.liao.edu.service.mapper.CourseDescriptionMapper;
 import com.liao.edu.service.service.CourseDescriptionService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**

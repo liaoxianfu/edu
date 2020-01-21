@@ -3,11 +3,11 @@ package com.liao.edu.service.controller.course;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.liao.edu.common.entity.Course;
+import com.liao.edu.common.entity.form.CourseInfoForm;
+import com.liao.edu.common.entity.query.CourseQuery;
+import com.liao.edu.common.entity.vo.CoursePublishVo;
 import com.liao.edu.common.vo.R;
-import com.liao.edu.service.entity.Course;
-import com.liao.edu.service.entity.form.CourseInfoForm;
-import com.liao.edu.service.entity.query.CourseQuery;
-import com.liao.edu.service.entity.vo.CoursePublishVo;
 import com.liao.edu.service.service.CourseService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -17,7 +17,6 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.List;
 import java.util.Map;
 
 /**

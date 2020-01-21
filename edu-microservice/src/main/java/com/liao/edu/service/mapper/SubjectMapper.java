@@ -1,7 +1,7 @@
 package com.liao.edu.service.mapper;
 
-import com.liao.edu.service.entity.Subject;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.liao.edu.common.entity.Subject;
 
 /**
  * <p>

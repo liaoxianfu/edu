@@ -2,10 +2,10 @@ package com.liao.edu.service.controller.chapter;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.liao.edu.common.entity.Chapter;
+import com.liao.edu.common.entity.Video;
+import com.liao.edu.common.entity.vo.ChapterVo;
 import com.liao.edu.common.vo.R;
-import com.liao.edu.service.entity.Chapter;
-import com.liao.edu.service.entity.Video;
-import com.liao.edu.service.entity.vo.ChapterVo;
 import com.liao.edu.service.service.ChapterService;
 import com.liao.edu.service.service.VideoService;
 import io.swagger.annotations.Api;
