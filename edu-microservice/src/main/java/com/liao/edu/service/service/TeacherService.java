@@ -6,6 +6,7 @@ import com.liao.edu.common.entity.Teacher;
 import com.liao.edu.common.entity.query.TeacherQuery;
 import com.liao.edu.common.vo.R;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -31,4 +32,6 @@ public interface TeacherService extends IService<Teacher> {
      * @return map
      */
     Map<String,String> getAllTeacherMap();
+
+    List<Teacher> findAllTeacherOrderByGmtModified();
 }

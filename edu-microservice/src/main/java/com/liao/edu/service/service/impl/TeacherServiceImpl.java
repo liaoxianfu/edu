@@ -46,6 +46,7 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
             String startTime = teacherQuery.getStartTime();
             String endTime = teacherQuery.getEndTime();
 
+            queryWrapper.orderByDesc("gmt_modified");
             if (!StringUtils.isEmpty(teacherName)) {
                 queryWrapper.like("name", teacherName);
             }
@@ -78,5 +79,11 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
             teacherMap.put(teacher.getId(), teacher.getName());
         });
         return teacherMap;
+    }
+
+    @Override
+    public List<Teacher> findAllTeacherOrderByGmtModified() {
+        QueryWrapper<Teacher> queryWrapper = new QueryWrapper<Teacher>().orderByDesc("gmt_modified");
+        return teacherMapper.selectList(queryWrapper);
     }
 }

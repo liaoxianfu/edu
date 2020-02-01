@@ -1,7 +1,10 @@
 spring:
   application:
     name: edu-zuul
-
+  servlet:
+    multipart:
+      max-file-size: 1024MB
+      max-request-size: 1024MB
 server:
   port: 9101
 

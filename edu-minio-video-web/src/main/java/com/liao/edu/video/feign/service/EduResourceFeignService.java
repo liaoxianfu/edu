@@ -1,6 +1,7 @@
 package com.liao.edu.video.feign.service;
 
 import com.liao.edu.common.vo.R;
+import com.liao.edu.video.feign.service.hystrix.EduResourceHystrixImpl;
 import feign.Response;
 import feign.form.spring.SpringFormEncoder;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -16,8 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  * @since 2019/12/23 18:27
  */
 
-@FeignClient(value = "edu-minio-video")
-@RequestMapping("/edu/edu-resource")
+@FeignClient(value = "edu-minio-video",path ="/edu/edu-resource",fallback = EduResourceHystrixImpl.class)
 public interface EduResourceFeignService {
 
     class MultipartSupportConfig {

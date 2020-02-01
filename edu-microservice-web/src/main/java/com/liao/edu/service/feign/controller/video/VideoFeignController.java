@@ -23,6 +23,8 @@ public class VideoFeignController {
     @ApiOperation(value = "添加小结")
     @PostMapping
     public R addOrUpdateVideo(@ApiParam(value = "小结信息", required = true) @RequestBody Video video) {
+        video.setGmtCreate(null);
+        video.setGmtModified(null);
         return service.addOrUpdateVideo(video);
     }
 

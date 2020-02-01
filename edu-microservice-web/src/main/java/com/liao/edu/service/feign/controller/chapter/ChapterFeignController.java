@@ -17,28 +17,37 @@ import javax.annotation.Resource;
 @Api(description = "章节信息添加")
 @RestController
 @RequestMapping("/v1/admin/edu/chapter")
-public class ChapterFeignController {
+public class ChapterFeignController implements ChapterFeignService {
     @Resource
     private ChapterFeignService service;
 
+    @Override
     @ApiOperation(value = "通过课程的ID获取章节信息")
     @GetMapping("/chapterVoList/{courseId}")
     public R getChapterVo(@ApiParam(value = "课程id", required = true) @PathVariable String courseId) {
         return service.getChapterVo(courseId);
     }
 
+    @Override
     @ApiOperation(value = "添加章节信息")
     @PostMapping
     public R addChapter(@ApiParam(value = "章节信息", required = true) @RequestBody Chapter chapter) {
         return service.addChapter(chapter);
     }
 
+    @Override
     @ApiOperation(value = "根据章节的id更新章节的信息")
     @PutMapping
     public R updateChapterById(@ApiParam(value = "章节信息", required = true) @RequestBody Chapter chapter) {
         return service.updateChapterById(chapter);
     }
 
+    @Override
+    public R findChapterById(String id) {
+        return service.findChapterById(id);
+    }
+
+    @Override
     @ApiOperation(value = "根据章节的id删除章节的信息")
     @DeleteMapping("/{id}")
     public R deleteChapterById(@PathVariable String id) {

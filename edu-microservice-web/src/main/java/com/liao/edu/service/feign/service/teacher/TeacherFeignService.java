@@ -12,8 +12,7 @@ import org.springframework.web.bind.annotation.*;
  * @since 2019/12/25 9:26
  */
 
-@FeignClient(value = "edu-microservice")
-@RequestMapping("/admin/edu/teacher")
+@FeignClient(value = "edu-microservice",path = "/admin/edu/teacher")
 public interface TeacherFeignService {
     @PostMapping("/{current}/{size}")
     public R findUser(@PathVariable int current, @PathVariable int size,@RequestBody TeacherQuery teacherQuery);
