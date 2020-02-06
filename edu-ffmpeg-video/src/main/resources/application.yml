@@ -17,11 +17,22 @@ spring:
     multipart:
       max-file-size: 1024MB
       max-request-size: 1024MB
+  rabbitmq:
+    host: 192.168.77.21
+    username: guest
+    password: 1234
+    port: 5672
 
+
+
+ffmpeg:
+  upload-path: D:/video
+  exe-path: D:/常用压缩包/ffmpeg-20200131-62d92a8-win64-static/bin/ffmpeg.exe
+  exchange: video.direct
+  routing-key: path
+  queues: path
 
 # 日志配置
-
-
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
@@ -40,20 +51,12 @@ logging:
 
 
 minio:
-  oss:
-    endpoint: http://192.168.77.21:9001
-    accessKey: minio
-    accessKeySecret: minio123
-    bucket: edu
-    videoPath: video
-    imgPath: img
-    otherPath: other
+  endpoint: http://192.168.77.21:9001
+  access-key: minio
+  secret-key: minio123
+  bucket: edu
+  video-path: video
 
-# 腾讯视频
-tencent:
-  video:
-    secretId: AKIDPaXEg5wMBqHWl7ec8PSH6iPkra4y89OY
-    secretKey: 0pSq0vc4RjoeF1iBQgv4EGiJk2yrY0JV
 
 # 配置注册中心的地址
 eureka:

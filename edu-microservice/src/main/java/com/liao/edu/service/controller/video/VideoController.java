@@ -1,6 +1,7 @@
 package com.liao.edu.service.controller.video;
 
 
+import com.liao.edu.common.entity.EduResource;
 import com.liao.edu.common.entity.Video;
 import com.liao.edu.common.vo.R;
 import com.liao.edu.service.service.VideoService;
@@ -25,6 +26,9 @@ public class VideoController {
 
     @Resource
     private VideoService videoService;
+
+
+
 
     @ApiOperation(value = "添加小结")
     @PostMapping

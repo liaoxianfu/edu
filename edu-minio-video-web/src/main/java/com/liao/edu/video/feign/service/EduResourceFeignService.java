@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  * @since 2019/12/23 18:27
  */
 
-@FeignClient(value = "edu-minio-video",path ="/edu/edu-resource",fallback = EduResourceHystrixImpl.class)
+@FeignClient(value = "edu-minio-video", path = "/edu/edu-resource")
 public interface EduResourceFeignService {
 
     class MultipartSupportConfig {
@@ -39,4 +39,7 @@ public interface EduResourceFeignService {
 
     @GetMapping("/video/file/{id}")
     Response getVideoFileByName(@PathVariable String id);
+
+    @PostMapping("/video/tencent/signature")
+    R getSignature();
 }

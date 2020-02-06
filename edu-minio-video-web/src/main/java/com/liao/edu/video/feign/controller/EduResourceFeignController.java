@@ -67,4 +67,9 @@ public class EduResourceFeignController {
             e.printStackTrace();
         }
     }
+
+    @PostMapping("/video/tencent/signature")
+    public R getSignature() {
+        return service.getSignature();
+    }
 }

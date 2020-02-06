@@ -1,70 +1,70 @@
-package com.liao.edu.video.service.impl;
+package com.liao.edu.ffmpeg.video.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.liao.edu.common.constants.ResultCodeEnum;
+import com.liao.edu.common.entity.EduResource;
 import com.liao.edu.common.exception.EduException;
-import com.liao.edu.common.utils.tencent.video.Signature;
-import com.liao.edu.video.entity.EduResource;
-import com.liao.edu.video.mapper.EduResourceMapper;
-import com.liao.edu.video.service.EduResourceService;
-import com.liao.edu.video.util.MinioClientPropertiesUtil;
-import io.minio.MinioClient;
-import io.minio.errors.*;
+import com.liao.edu.ffmpeg.video.config.Ffmpeg;
+import com.liao.edu.ffmpeg.video.mapper.EduResourceMapper;
+import com.liao.edu.ffmpeg.video.service.EduResourceService;
+import com.liao.edu.ffmpeg.video.utils.FileStorage;
+import com.liao.edu.ffmpeg.video.utils.FileSystemUtils;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import org.xmlpull.v1.XmlPullParserException;
 
 import javax.annotation.Resource;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.util.Random;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
- * <p>
- * 服务实现类
- * </p>
- *
  * @author liao
- * @since 2019-12-21
+ * @since 2020/2/6 18:34
  */
+@Slf4j
 @Service
 public class EduResourceServiceImpl extends ServiceImpl<EduResourceMapper, EduResource> implements EduResourceService {
 
     @Resource
-    private MinioClient minioClient;
+    private FileStorage fileStorage;
 
-    @Value("${tencent.video.secretId}")
-    private String secretId;
-
-    @Value("${tencent.video.secretKey}")
-    private String secretKey;
+    @Resource
+    private RabbitTemplate rabbitTemplate;
+    @Resource
+    private Ffmpeg ffmpeg;
 
 
     @Override
-    public String uploadResource(String courseId, MultipartFile file) {
-        // 存储规则
-        String objectName = MinioClientPropertiesUtil.VIDEO_PATH + "/" + courseId + "/" + System.currentTimeMillis() + "/" + file.getOriginalFilename();
+    public void uploadResource(String courseId, String token, MultipartFile file) {
+        // 获取带扩展名的文件名
+        String originalFilename = file.getOriginalFilename();
+        log.info("originalFilename  {}", originalFilename);
+        FileSystemUtils fileSystemUtils = FileSystemUtils.getInstance();
+        assert originalFilename != null;
+        String fileName = fileSystemUtils.getInputFile(ffmpeg.getUploadPath(), originalFilename);
+        log.info("fileName  {}", fileName);
+
         try {
-            InputStream inputStream = file.getInputStream();
-            String bucketName = MinioClientPropertiesUtil.BUCKET;
-            minioClient.putObject(bucketName, objectName, inputStream, inputStream.available(), "application/octet-stream");
-            EduResource eduResource = new EduResource().setVideoUrl(bucketName + "/" + objectName);
-            boolean save = this.save(eduResource);
-            if (save) {
-                return eduResource.getId();
-            } else {
-                return null;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new EduException(ResultCodeEnum.UPLOAD_ERROR);
+            // 上传文件
+            FileUtils.copyInputStreamToFile(file.getInputStream(), new File(fileName));
+            // 创建转码文件
+            String outPutPath = fileSystemUtils.getFfmpegOutPutPath(ffmpeg.getUploadPath(), originalFilename);
+            // 推送到rabbitmq进行转码
+            Map<String, String> map = new HashMap<>(3);
+            map.put("in", fileName);
+            map.put("out", outPutPath);
+            map.put("token", token);
+            map.put("courseId", courseId);
+            rabbitTemplate.convertAndSend(ffmpeg.getExchange(), ffmpeg.getRoutingKey(), map);
+        } catch (IOException e) {
+            log.error("发送转码到队列错误{}", e.getMessage());
         }
     }
 
@@ -77,7 +77,7 @@ public class EduResourceServiceImpl extends ServiceImpl<EduResourceMapper, EduRe
         try {
             boolean b = this.removeById(eduResource.getId());
             if (b) {
-                minioClient.removeObject(bucketName, fileName);
+                fileStorage.deleteFile(bucketName, fileName);
                 return true;
             } else {
                 return false;
@@ -86,7 +86,6 @@ public class EduResourceServiceImpl extends ServiceImpl<EduResourceMapper, EduRe
             e.printStackTrace();
             throw new EduException(ResultCodeEnum.DELETE_FILE_ERROR);
         }
-
     }
 
     @Override
@@ -99,6 +98,7 @@ public class EduResourceServiceImpl extends ServiceImpl<EduResourceMapper, EduRe
 
     @Override
     public InputStream getFileObjectById(String id) {
+
         // 先获取eduSource
         EduResource eduResource = this.getById(id);
         String videoUrl = eduResource.getVideoUrl();
@@ -108,7 +108,7 @@ public class EduResourceServiceImpl extends ServiceImpl<EduResourceMapper, EduRe
             String bucket = split[0];
             String fileName = videoUrl.replace(bucket + "/", "");
             try {
-                return minioClient.getObject(bucket, fileName);
+                return fileStorage.downloadFile(bucket, fileName);
             } catch (Exception e) {
                 // 获取报错信息
                 log.error(e.getMessage());
@@ -121,6 +121,7 @@ public class EduResourceServiceImpl extends ServiceImpl<EduResourceMapper, EduRe
 
     @Override
     public InputStream getFileObject(EduResource eduResource) {
+
         String videoUrl = eduResource.getVideoUrl();
         // 如果获取的videoURL不为空
         if (!StringUtils.isEmpty(videoUrl)) {
@@ -128,7 +129,7 @@ public class EduResourceServiceImpl extends ServiceImpl<EduResourceMapper, EduRe
             String bucket = split[0];
             String fileName = videoUrl.replace(bucket + "/", "");
             try {
-                return minioClient.getObject(bucket, fileName);
+                return fileStorage.downloadFile(bucket, fileName);
             } catch (Exception e) {
                 // 获取报错信息
                 log.error(e.getMessage());
@@ -138,24 +139,4 @@ public class EduResourceServiceImpl extends ServiceImpl<EduResourceMapper, EduRe
             return null;
         }
     }
-
-    @Override
-    public String getSignature() {
-        Signature sign = new Signature();
-        sign.setSecretId(secretId);
-        sign.setSecretKey(secretKey);
-        sign.setCurrentTime(System.currentTimeMillis() / 1000);
-        sign.setRandom(new Random().nextInt(java.lang.Integer.MAX_VALUE));
-        sign.setSignValidDuration(3600 * 24 * 2);
-        String signature = "";
-        try {
-            signature = sign.getUploadSignature();
-            return signature;
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new EduException(ResultCodeEnum.SIGNATURE_ERROR);
-        }
-    }
 }
-
-

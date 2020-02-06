@@ -36,4 +36,9 @@ public class EduResourceHystrixImpl implements EduResourceFeignService {
     public Response getVideoFileByName(String id) {
         return null;
     }
+
+    @Override
+    public R getSignature() {
+        return errorInfo();
+    }
 }

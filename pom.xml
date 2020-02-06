@@ -25,6 +25,7 @@
         <module>edu-zuul</module>
         <module>edu-aliyun-oss-web</module>
         <module>edu-microservice-web</module>
+        <module>edu-ffmpeg-video</module>
     </modules>
 
     <properties>
@@ -43,13 +44,14 @@
         <aliyun-java-sdk-core.version>4.3.3</aliyun-java-sdk-core.version>
         <aliyun-java-sdk-vod.version>2.15.5</aliyun-java-sdk-vod.version>
         <gson.version>2.8.2</gson.version>
-        <minio.version>3.0.10</minio.version>
+        <minio.version>6.0.12</minio.version>
         <!-- Environment Settings -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
         <!-- Spring Settings -->
         <spring-cloud.version>Hoxton.RELEASE</spring-cloud.version>
+        <commons-io.version>2.6</commons-io.version>
+        <commons-lang3.version>3.9</commons-lang3.version>
     </properties>
 
 

@@ -1,18 +1,16 @@
-package com.liao.edu.video.controller;
+package com.liao.edu.ffmpeg.video.controller;
 
 
 import com.liao.edu.common.constants.ResultCodeEnum;
+import com.liao.edu.common.entity.EduResource;
 import com.liao.edu.common.exception.EduException;
 import com.liao.edu.common.vo.R;
-import com.liao.edu.video.entity.EduResource;
-import com.liao.edu.video.service.EduResourceService;
+import com.liao.edu.ffmpeg.video.service.EduResourceService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
@@ -41,15 +39,23 @@ public class EduResourceController {
         this.eduResourceService = eduResourceService;
     }
 
+    @PostMapping("video/storage")
+    public R saveInfo(@RequestBody EduResource eduResource) {
+        log.info("获取到的信息为{}", eduResource);
+        boolean save = eduResourceService.save(eduResource);
+        if (save) {
+            return R.ok();
+        }
+        return R.error();
+    }
+
+
     @ApiOperation(value = "视频文件上传")
     @PostMapping("/video")
-    public R uploadFile(String courseId, MultipartFile file) {
-        String id = eduResourceService.uploadResource(courseId, file);
-        if (StringUtils.isEmpty(id)) {
-            return R.error();
-        } else {
-            return R.ok().data("id", id);
-        }
+    public R uploadFile(String courseId, String token, MultipartFile file) {
+        log.info("获取到数据{}，{}", courseId, token);
+        eduResourceService.uploadResource(courseId, token, file);
+        return R.ok();
     }
 
 
@@ -110,15 +116,6 @@ public class EduResourceController {
             throw new EduException(ResultCodeEnum.DOWNLOAD_FILE_ERROR);
         }
     }
-    // 获取签名
-
-    @PostMapping("/video/tencent/signature")
-    public R getSignature() {
-        String signature = "";
-        signature = eduResourceService.getSignature();
-        return R.ok().data("signature", signature);
-    }
-
 
 }
 

@@ -1,7 +1,7 @@
-package com.liao.edu.video.service;
+package com.liao.edu.ffmpeg.video.service;
 
-import com.liao.edu.video.entity.EduResource;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.liao.edu.common.entity.EduResource;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.InputStream;
@@ -16,12 +16,12 @@ import java.io.InputStream;
  */
 public interface EduResourceService extends IService<EduResource> {
     /**
-     * 上传文件
+     * 上传视频文件
      *
-     * @param file 文件
-     * @return eduResource
+     * @param courseId 课程ID
+     * @param file     文件
      */
-    String uploadResource(String course, MultipartFile file);
+    void uploadResource(String courseId,String token, MultipartFile file);
 
     /**
      * 删除数据
@@ -56,5 +56,5 @@ public interface EduResourceService extends IService<EduResource> {
      */
     InputStream getFileObject(EduResource eduResource);
 
-    String getSignature();
+
 }
