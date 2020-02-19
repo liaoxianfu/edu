@@ -1,6 +1,7 @@
 package com.liao.edu.service.controller.teacher;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.liao.edu.common.entity.Course;
 import com.liao.edu.common.entity.Teacher;
 import com.liao.edu.common.vo.R;
 import com.liao.edu.service.service.TeacherService;
@@ -46,8 +47,14 @@ public class TeacherWebController {
     @GetMapping("/{current}/{size}}")
     public R getTeacherByPage(@PathVariable int current, @PathVariable int size) {
         Page<Teacher> teacherPage = new Page<>(current, size);
-        R r = teacherService.teacherQuery(teacherPage, null);
-        return r;
+        return teacherService.teacherQuery(teacherPage, null);
+    }
+
+    @ApiOperation(value = "通过教师的id查询教授的课程")
+    @GetMapping("course/{id}")
+    public R getCourseListByTeacherId(@PathVariable String id) {
+        List<Course> courseList = teacherService.findCourseListByTeacherList(id);
+        return R.ok().data("courseList", courseList);
     }
 
 

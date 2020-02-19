@@ -2,6 +2,7 @@ package com.liao.edu.service.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.liao.edu.common.entity.Course;
 import com.liao.edu.common.entity.Teacher;
 import com.liao.edu.common.entity.query.TeacherQuery;
 import com.liao.edu.common.vo.R;
@@ -34,4 +35,6 @@ public interface TeacherService extends IService<Teacher> {
     Map<String,String> getAllTeacherMap();
 
     List<Teacher> findAllTeacherOrderByGmtModified();
+    List<Course> findCourseListByTeacherList(String id);
+
 }

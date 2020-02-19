@@ -33,4 +33,8 @@ public class TeacherWebFeignController {
         return teacherWebFeignService.getTeacherById(id);
     }
 
+    @GetMapping("course/{id}")
+    public R getCourseListByTeacherId(@PathVariable String id){
+        return teacherWebFeignService.getCourseListByTeacherId(id);
+    }
 }

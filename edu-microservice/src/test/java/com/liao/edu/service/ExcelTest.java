@@ -1,8 +1,10 @@
 package com.liao.edu.service;
 
+import com.liao.edu.common.entity.Course;
 import com.liao.edu.common.entity.vo.CoursePublishVo;
 import com.liao.edu.service.mapper.CourseMapper;
 import com.liao.edu.service.mapper.TeacherMapper;
+import com.liao.edu.service.service.CourseService;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -16,6 +18,8 @@ import javax.annotation.Resource;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author liao
@@ -84,5 +88,24 @@ public class ExcelTest {
         System.out.println(coursePublishVo);
     }
 
+    @Resource
+    CourseService courseService;
 
+    @Test
+    public void testCourse(){
+        List<Course> courseList = courseService.getCourseList(3, "1203302535075520513");
+        courseList.forEach(course -> {
+            System.out.println(course.getTitle());
+        });
+    }
+
+    @Test
+    public void testSubArrayList(){
+        ArrayList<Integer> integers = new ArrayList<>();
+        for (int i = 0; i < 100; i++) {
+            integers.add(i);
+        }
+        List<Integer> integers1 = integers.subList(55, integers.size());
+        integers1.forEach(System.out::println);
+    }
 }

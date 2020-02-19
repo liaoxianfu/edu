@@ -9,6 +9,7 @@ import lombok.Data;
 
 @Data
 public class CoursePublishVo {
+    private static final long serialVersionUID=1L;
     private String cover;
     private String title;
     private String lessonNum;

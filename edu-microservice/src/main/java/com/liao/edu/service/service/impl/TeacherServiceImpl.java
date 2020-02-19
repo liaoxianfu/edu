@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.liao.edu.common.entity.Course;
 import com.liao.edu.common.entity.Teacher;
 import com.liao.edu.common.entity.query.TeacherQuery;
 import com.liao.edu.common.vo.R;
@@ -85,5 +86,10 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
     public List<Teacher> findAllTeacherOrderByGmtModified() {
         QueryWrapper<Teacher> queryWrapper = new QueryWrapper<Teacher>().orderByDesc("gmt_modified");
         return teacherMapper.selectList(queryWrapper);
+    }
+
+    @Override
+    public List<Course> findCourseListByTeacherList(String id) {
+        return teacherMapper.findCourseByTeacherId(id);
     }
 }

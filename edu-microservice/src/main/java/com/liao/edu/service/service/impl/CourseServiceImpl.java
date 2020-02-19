@@ -6,11 +6,16 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.liao.edu.common.constants.ResultCodeEnum;
 import com.liao.edu.common.entity.Course;
 import com.liao.edu.common.entity.CourseDescription;
+import com.liao.edu.common.entity.Subject;
 import com.liao.edu.common.entity.form.CourseInfoForm;
 import com.liao.edu.common.entity.query.CourseQuery;
 import com.liao.edu.common.entity.vo.CoursePublishVo;
+import com.liao.edu.common.entity.vo.CourseWebVo;
 import com.liao.edu.common.exception.EduException;
+import com.liao.edu.common.entity.query.CoursePage;
+import com.liao.edu.common.entity.query.CourseWebQuery;
 import com.liao.edu.service.mapper.CourseMapper;
+import com.liao.edu.service.mapper.SubjectMapper;
 import com.liao.edu.service.mapper.TeacherMapper;
 import com.liao.edu.service.service.CourseDescriptionService;
 import com.liao.edu.service.service.CourseService;
@@ -44,6 +49,9 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
 
     @Resource
     private TeacherMapper teacherMapper;
+
+    @Resource
+    private SubjectMapper subjectMapper;
 
 
     /**
@@ -142,16 +150,16 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
                 queryWrapper.like("title", courseName);
             }
 
-            if (!StringUtils.isEmpty(teacherName)){
+            if (!StringUtils.isEmpty(teacherName)) {
                 // 查询出所有符合条件的id
                 List<String> teacherIdList = teacherMapper.findTeacherIdLikeName(teacherName);
                 // 判断查询数据不存在的情况
-                if (teacherIdList.size()<=0){
+                if (teacherIdList.size() <= 0) {
                     map.put("items", null);
                     map.put("total", 0);
                     return map;
                 }
-                queryWrapper.in("teacher_id",teacherIdList);
+                queryWrapper.in("teacher_id", teacherIdList);
             }
 
             if (!StringUtils.isEmpty(startTime)) {
@@ -179,5 +187,74 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
     @Override
     public CoursePublishVo getCoursePublishInfoByCourseId(String courseId) {
         return courseMapper.selectCoursePublishVoByCourseId(courseId);
+    }
+
+    @Override
+    public List<Subject> selectSubject(String parentId) {
+        return courseMapper.selectSubject(parentId);
+    }
+
+    @Override
+    public List<Course> getCourseList(Integer level, String id) {
+        // level为3的时候是二级菜单的情况
+        if (level == 3) {
+            QueryWrapper<Course> wrapper = new QueryWrapper<Course>().eq("subject_id", id);
+            return courseMapper.selectList(wrapper);
+        } else if (level == 2) {
+
+            // 一级菜单的情况
+            return courseMapper.selectCourseListByFirstLevelSubject(id);
+        } else {
+            // 默认是全部的情况
+            return this.list();
+        }
+    }
+
+
+    @Override
+    public CoursePage getCourseByCourseWebQuery(CourseWebQuery query) {
+        Integer level = query.getLevel();
+        String subjectId = query.getSubjectId();
+        List<Course> courses;
+        if (level == 3) {
+            QueryWrapper<Course> wrapper = new QueryWrapper<Course>().eq("subject_id", subjectId);
+            courses = courseMapper.selectList(wrapper);
+        } else if (level == 2) {
+            courses = courseMapper.selectCourseListByFirstLevelSubject(subjectId);
+        } else {
+            courses = this.list();
+        }
+        return setCoursePage(query, courses);
+    }
+
+    @Override
+    public CourseWebVo getCourseWebVoInfoByCourseId(String courseId) {
+        return courseMapper.selectWebVoByCourseId(courseId);
+    }
+
+    private CoursePage setCoursePage(CourseWebQuery query, List<Course> courses) {
+        CoursePage coursePage = new CoursePage();
+        Integer pageSize = query.getPageSize();
+        Integer current = query.getCurrent();
+        int total = courses.size();
+        // 设置查询的总记录数
+        coursePage.setTotal(total);
+        // 设置查询分页的数量
+        coursePage.setPage(getPage(total, pageSize));
+        // 判断是否存在数据 如果没有数据就不能进行list剪切
+        if (total != 0) {
+            int endSize = Math.min(pageSize * current, total);
+            courses = courses.subList((current - 1) * pageSize, endSize);
+        }
+        coursePage.setCourseList(courses);
+        return coursePage;
+    }
+
+    private int getPage(int total, int pageSize) {
+        int page = total / pageSize;
+        if (total % pageSize != 0) {
+            page += 1;
+        }
+        return page;
     }
 }

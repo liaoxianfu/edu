@@ -2,9 +2,11 @@
   <dictionary name="liao">
     <words>
       <w>aliyun</w>
+      <w>ffmpeg</w>
       <w>liao</w>
       <w>minio</w>
       <w>projectlombok</w>
+      <w>tencent</w>
     </words>
   </dictionary>
 </component>

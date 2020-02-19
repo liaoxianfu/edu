@@ -19,8 +19,8 @@ spring:
       max-request-size: 1024MB
   rabbitmq:
     host: 192.168.77.21
-    username: guest
-    password: 1234
+    username: liao
+    password: 123456
     port: 5672
 
 

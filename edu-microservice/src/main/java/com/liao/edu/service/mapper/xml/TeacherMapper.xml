@@ -7,4 +7,10 @@
         FROM edu.edu_teacher
         where edu_teacher.name like '%${name}%';
     </select>
+    <select id="findCourseByTeacherId" resultType="com.liao.edu.common.entity.Course">
+        select id, teacher_id, subject_id, title, price, lesson_num, cover, buy_count, view_count, version,
+        status,gmt_create, gmt_modified
+        from edu_course
+        where teacher_id = #{teacherId}
+    </select>
 </mapper>

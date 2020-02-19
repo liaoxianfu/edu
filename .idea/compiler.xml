@@ -9,18 +9,22 @@
         <module name="edu-microservice" />
         <module name="edu-minio-video-web" />
         <module name="edu-aliyun-oss-web" />
+        <module name="edu-minio-video-api" />
         <module name="edu-microservice-web" />
         <module name="edu-zuul" />
         <module name="edu-common" />
         <module name="edu-aliyun-oss" />
         <module name="edu-minio-video" />
         <module name="edu-eureka" />
+        <module name="edu-ffmpeg-video" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="demo" target="1.5" />
       <module name="edu-aliyun-video" target="1.8" />
+      <module name="edu-minio-video-api" target="1.8" />
       <module name="edu-parent" target="1.8" />
+      <module name="edu-tencent-video" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -31,10 +35,13 @@
       <module name="edu-aliyun-video" options="-parameters" />
       <module name="edu-common" options="-parameters" />
       <module name="edu-eureka" options="-parameters" />
+      <module name="edu-ffmpeg-video" options="-parameters" />
       <module name="edu-microservice" options="-parameters" />
       <module name="edu-microservice-web" options="-parameters" />
       <module name="edu-minio-video" options="-parameters" />
+      <module name="edu-minio-video-api" options="-parameters" />
       <module name="edu-minio-video-web" options="-parameters" />
+      <module name="edu-tencent-video" options="-parameters" />
       <module name="edu-zuul" options="-parameters" />
     </option>
   </component>

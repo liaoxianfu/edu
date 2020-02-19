@@ -3,10 +3,15 @@ package com.liao.edu.service.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.liao.edu.common.entity.Course;
+import com.liao.edu.common.entity.Subject;
 import com.liao.edu.common.entity.form.CourseInfoForm;
 import com.liao.edu.common.entity.query.CourseQuery;
 import com.liao.edu.common.entity.vo.CoursePublishVo;
+import com.liao.edu.common.entity.query.CoursePage;
+import com.liao.edu.common.entity.query.CourseWebQuery;
+import com.liao.edu.common.entity.vo.CourseWebVo;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -57,4 +62,24 @@ public interface CourseService extends IService<Course> {
      * @return CoursePublishVo
      */
     CoursePublishVo getCoursePublishInfoByCourseId(String courseId);
+
+    /**
+     * 根据父id查询所属的子id列表 一级学科列表parentId = 0
+     *
+     * @param parentId 父id
+     * @return list
+     */
+    List<Subject> selectSubject(String parentId);
+
+    /**
+     * 通过等级判断选择的是 全部 一级还是二级学科的课程
+     * @param level 等级 1，2，3
+     * @param id id
+     * @return
+     */
+    List<Course> getCourseList(Integer level,String id);
+
+    CoursePage getCourseByCourseWebQuery(CourseWebQuery query);
+
+    CourseWebVo getCourseWebVoInfoByCourseId(String courseId);
 }
