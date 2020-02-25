@@ -5,6 +5,7 @@ import com.liao.edu.common.entity.Course;
 import com.liao.edu.common.entity.Subject;
 import com.liao.edu.common.entity.vo.CoursePublishVo;
 import com.liao.edu.common.entity.vo.CourseWebVo;
+import com.liao.edu.common.entity.vo.VideoWebVo;
 
 import java.util.List;
 
@@ -47,4 +48,8 @@ public interface CourseMapper extends BaseMapper<Course> {
     List<Course> selectCourseListByFirstLevelSubject(String subjectId);
 
     CourseWebVo selectWebVoByCourseId(String id);
+
+    String selectCourseIdByVideoId(String videoId);
+
+    VideoWebVo selectVideoResourceByVideoId(String videoId);
 }

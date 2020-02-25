@@ -49,4 +49,22 @@ public class CourseWebFeignController {
     public R getCourseDetailInfo(@PathVariable String courseId) {
         return service.getCourseDetailInfo(courseId);
     }
+
+    @ApiOperation(value = "通过courseId获取章节以及章节下的小节信息")
+    @GetMapping("/chapterVoList/{courseId}")
+    public R getChapterVoList(@PathVariable String courseId) {
+        return service.getChapterVoList(courseId);
+    }
+
+    @ApiOperation(value = "通过视频id查询出章节信息")
+    @GetMapping("/video/list/{videoId}")
+    public R getChapterVoListByVideoId(@PathVariable String videoId){
+        return service.getChapterVoListByVideoId(videoId);
+    }
+
+    @ApiOperation(value = "通过视频id查询视频播放资源以及教师的信息")
+    @GetMapping("/video/resource/{videoId}")
+    public R getVideoResource(@PathVariable String videoId) {
+        return service.getVideoResource(videoId);
+    }
 }

@@ -9,14 +9,17 @@ import com.liao.edu.common.entity.CourseDescription;
 import com.liao.edu.common.entity.Subject;
 import com.liao.edu.common.entity.form.CourseInfoForm;
 import com.liao.edu.common.entity.query.CourseQuery;
+import com.liao.edu.common.entity.vo.ChapterVo;
 import com.liao.edu.common.entity.vo.CoursePublishVo;
 import com.liao.edu.common.entity.vo.CourseWebVo;
+import com.liao.edu.common.entity.vo.VideoWebVo;
 import com.liao.edu.common.exception.EduException;
 import com.liao.edu.common.entity.query.CoursePage;
 import com.liao.edu.common.entity.query.CourseWebQuery;
 import com.liao.edu.service.mapper.CourseMapper;
 import com.liao.edu.service.mapper.SubjectMapper;
 import com.liao.edu.service.mapper.TeacherMapper;
+import com.liao.edu.service.service.ChapterService;
 import com.liao.edu.service.service.CourseDescriptionService;
 import com.liao.edu.service.service.CourseService;
 import org.apache.commons.lang3.StringUtils;
@@ -52,6 +55,9 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
 
     @Resource
     private SubjectMapper subjectMapper;
+
+    @Resource
+    private ChapterService chapterService;
 
 
     /**
@@ -230,6 +236,18 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
     @Override
     public CourseWebVo getCourseWebVoInfoByCourseId(String courseId) {
         return courseMapper.selectWebVoByCourseId(courseId);
+    }
+
+    @Override
+    public List<ChapterVo> getChapterVoListByVideoId(String videoId) {
+        // 获取视频id所在的课程id
+        String courseId = courseMapper.selectCourseIdByVideoId(videoId);
+        return chapterService.findChapterVoByCourseId(courseId);
+    }
+
+    @Override
+    public VideoWebVo selectVideoResourceByVideoId(String videoId) {
+        return courseMapper.selectVideoResourceByVideoId(videoId);
     }
 
     private CoursePage setCoursePage(CourseWebQuery query, List<Course> courses) {

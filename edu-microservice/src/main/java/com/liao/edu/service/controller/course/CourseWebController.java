@@ -4,8 +4,11 @@ import com.liao.edu.common.entity.Course;
 import com.liao.edu.common.entity.Subject;
 import com.liao.edu.common.entity.query.CoursePage;
 import com.liao.edu.common.entity.query.CourseWebQuery;
+import com.liao.edu.common.entity.vo.ChapterVo;
 import com.liao.edu.common.entity.vo.CourseWebVo;
+import com.liao.edu.common.entity.vo.VideoWebVo;
 import com.liao.edu.common.vo.R;
+import com.liao.edu.service.service.ChapterService;
 import com.liao.edu.service.service.CourseService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -27,6 +30,9 @@ import java.util.List;
 public class CourseWebController {
     @Resource
     private CourseService courseService;
+
+    @Resource
+    private ChapterService chapterService;
 
     @GetMapping("/sub/{parentId}")
     public R getSubjectList(@PathVariable String parentId) {
@@ -59,6 +65,27 @@ public class CourseWebController {
     public R getCourseDetailInfo(@PathVariable String courseId) {
         CourseWebVo webVo = courseService.getCourseWebVoInfoByCourseId(courseId);
         return R.ok().data("courseInfo", webVo);
+    }
+
+    @ApiOperation(value = "通过courseId获取章节以及章节下的小节信息")
+    @GetMapping("/chapterVoList/{courseId}")
+    public R getChapterVoList(@PathVariable String courseId) {
+        List<ChapterVo> chapterVoList = chapterService.findChapterVoByCourseId(courseId);
+        return R.ok().data("chapterVoList", chapterVoList);
+    }
+
+    @ApiOperation(value = "通过视频id查询出章节信息")
+    @GetMapping("/video/list/{videoId}")
+    public R getChapterVoListByVideoId(@PathVariable String videoId) {
+        List<ChapterVo> chapterVos = courseService.getChapterVoListByVideoId(videoId);
+        return R.ok().data("chapterVoList", chapterVos);
+    }
+
+    @ApiOperation(value = "通过视频id查询视频播放资源以及教师的信息")
+    @GetMapping("/video/resource/{videoId}")
+    public R getVideoResource(@PathVariable String videoId) {
+        VideoWebVo videoWebVo = courseService.selectVideoResourceByVideoId(videoId);
+        return R.ok().data("videoResource", videoWebVo);
     }
 
 

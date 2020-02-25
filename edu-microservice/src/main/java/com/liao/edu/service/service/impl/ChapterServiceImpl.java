@@ -36,7 +36,7 @@ public class ChapterServiceImpl extends ServiceImpl<ChapterMapper, Chapter> impl
     @Override
     public List<ChapterVo> findChapterVoByCourseId(String courseId) {
         // 获取符合条件的chapter列表
-        List<Chapter> chapterList = this.list(new QueryWrapper<Chapter>().eq("course_id", courseId));
+        List<Chapter> chapterList = this.list(new QueryWrapper<Chapter>().eq("course_id", courseId).orderByAsc("sort"));
         // 创建chapterVo列表
         List<ChapterVo> chapterVos = new ArrayList<>();
         chapterList.forEach(chapter -> {
@@ -45,7 +45,7 @@ public class ChapterServiceImpl extends ServiceImpl<ChapterMapper, Chapter> impl
             String chapterId = chapter.getId();
             chapterVo.setId(chapterId);
             chapterVo.setTitle(chapter.getTitle());
-            List<Video> videos = videoMapper.selectList(new QueryWrapper<Video>().eq("chapter_id",chapterId));
+            List<Video> videos = videoMapper.selectList(new QueryWrapper<Video>().eq("chapter_id",chapterId).orderByAsc("sort"));
             // 创建VideoVoList
             List<VideoVo> videoVoList = new ArrayList<>();
             // 属性拷贝到VideoVo中 并交VideoVo添加到列表

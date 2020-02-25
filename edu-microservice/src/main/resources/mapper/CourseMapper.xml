@@ -76,5 +76,24 @@
         LEFT JOIN edu_teacher t ON t.`id` = c.`teacher_id`
         WHERE c.id = #{id}
     </select>
+    <select id="selectCourseIdByVideoId" resultType="java.lang.String">
+        select course_id from edu_video where id=#{videoId}
+    </select>
+    <select id="selectVideoResourceByVideoId" resultType="com.liao.edu.common.entity.vo.VideoWebVo">
+        SELECT
+        v.id videoId,
+        v.video_source_id videoSourceId,
+        v.title videoTitle,
+        t.avatar teacherAvatar,
+        t.`name` teacherName,
+        t.intro teacherIntroduce,
+        t.id teacherId
+        FROM
+        edu_video v
+        LEFT JOIN edu_course c ON c.id = v.course_id
+        LEFT JOIN edu_teacher t ON t.id = c.teacher_id
+        WHERE
+        v.id = #{videoId};
+    </select>
 
 </mapper>

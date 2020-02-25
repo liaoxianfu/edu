@@ -29,4 +29,12 @@ public interface CourseWebFeignService {
     @GetMapping("/list/{courseId}")
     R getCourseDetailInfo(@PathVariable String courseId);
 
+    @GetMapping("/chapterVoList/{courseId}")
+    public R getChapterVoList(@PathVariable String courseId);
+
+    @GetMapping("/video/list/{videoId}")
+    public R getChapterVoListByVideoId(@PathVariable String videoId);
+
+    @GetMapping("/video/resource/{videoId}")
+    public R getVideoResource(@PathVariable String videoId);
 }

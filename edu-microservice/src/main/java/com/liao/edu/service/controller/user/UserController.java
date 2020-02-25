@@ -5,6 +5,9 @@ import com.liao.edu.common.vo.R;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @author liao
  * create at 2019/12/4 13:19
@@ -22,7 +25,7 @@ public class UserController {
 
     @GetMapping("/info")
     public R info(String token) {
-        log.info("token={}",token);
+        log.info("token={}", token);
 
         return R.ok().data("roles", "[\"admin\"]")
                 .data("introduction", "I am a super administrator")

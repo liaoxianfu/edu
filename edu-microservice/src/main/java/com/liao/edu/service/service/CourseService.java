@@ -6,10 +6,12 @@ import com.liao.edu.common.entity.Course;
 import com.liao.edu.common.entity.Subject;
 import com.liao.edu.common.entity.form.CourseInfoForm;
 import com.liao.edu.common.entity.query.CourseQuery;
+import com.liao.edu.common.entity.vo.ChapterVo;
 import com.liao.edu.common.entity.vo.CoursePublishVo;
 import com.liao.edu.common.entity.query.CoursePage;
 import com.liao.edu.common.entity.query.CourseWebQuery;
 import com.liao.edu.common.entity.vo.CourseWebVo;
+import com.liao.edu.common.entity.vo.VideoWebVo;
 
 import java.util.List;
 import java.util.Map;
@@ -82,4 +84,13 @@ public interface CourseService extends IService<Course> {
     CoursePage getCourseByCourseWebQuery(CourseWebQuery query);
 
     CourseWebVo getCourseWebVoInfoByCourseId(String courseId);
+
+    /**
+     * 在视频播放页面 通过页面传递的videoId查询视频所在的课程的章节信息
+     * @param videoId
+     * @return
+     */
+    List<ChapterVo> getChapterVoListByVideoId(String videoId);
+
+    VideoWebVo selectVideoResourceByVideoId(String videoId);
 }

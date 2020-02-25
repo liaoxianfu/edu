@@ -24,3 +24,7 @@ zuul:
     api-microservice:
       path: /api/edu/**
       serviceId: edu-microservice-web
+#      解决上传图像超时的问题
+ribbon:
+  ReadTimeout: 10000
+  ConnectTimeout: 10000
