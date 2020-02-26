@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
  * @author liao
  * @since 2019/12/24 15:52
  */
-@FeignClient(value = "edu-microservice", path = "/admin/edu/chapter")
+@FeignClient( value = "edu-microservice", path = "/admin/edu/chapter")
 
 public interface ChapterFeignService {
     @GetMapping("/chapterVoList/{courseId}")

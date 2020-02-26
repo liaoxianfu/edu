@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MyBatisCodeHelperDatasource">
+    <option name="projectProfile">
+      <ProjectProfile>
+        <option name="javaMapperPackage" value="com.liao.edu.service.mapper" />
+        <option name="javaMapperPath" value="E:\Java\edu\edu-microservice\src\main\java" />
+        <option name="javaModelPackage" value="com.liao.edu.common.entity" />
+        <option name="javaModelPath" value="E:\Java\edu\edu-common\src\main\java" />
+        <option name="lastDatabaseCrudChooseModuleName" value="edu-aliyun-oss" />
+        <option name="lombokDataAnnotation" value="true" />
+        <option name="moduleNameToPackageAndPathMap">
+          <map>
+            <entry key="edu-aliyun-oss">
+              <value>
+                <UserPackageAndPathInfoByModule>
+                  <option name="javaMapperPackage" value="com.liao.edu.service.mapper" />
+                  <option name="javaMapperPath" value="E:\Java\edu\edu-microservice\src\main\java" />
+                  <option name="javaModelPacakge" value="com.liao.edu.common.entity" />
+                  <option name="javaModelPath" value="E:\Java\edu\edu-common\src\main\java" />
+                  <option name="xmlPackage" value="mapper" />
+                  <option name="xmlPath" value="E:\Java\edu\edu-microservice\src\main\resources" />
+                </UserPackageAndPathInfoByModule>
+              </value>
+            </entry>
+          </map>
+        </option>
+        <option name="removeTablePreName" value="edu_" />
+        <option name="tableGenerateConfigs">
+          <map>
+            <entry key="edu:edu_student">
+              <value>
+                <TableGenerateConfig>
+                  <option name="generatedKey" value="" />
+                  <option name="javaModelName" value="Student" />
+                  <option name="moduleName" value="edu-aliyun-oss" />
+                  <option name="sequenceColumn" value="" />
+                  <option name="sequenceId" value="" />
+                  <option name="useActualColumnName" value="false" />
+                </TableGenerateConfig>
+              </value>
+            </entry>
+          </map>
+        </option>
+        <option name="userMybatisPlus" value="true" />
+        <option name="xmlMapperPackage" value="mapper" />
+        <option name="xmlMapperPath" value="E:\Java\edu\edu-microservice\src\main\resources" />
+      </ProjectProfile>
+    </option>
+  </component>
+</project>

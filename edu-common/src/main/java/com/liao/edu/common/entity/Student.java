@@ -1,12 +1,10 @@
 package com.liao.edu.common.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 /**
@@ -33,6 +31,11 @@ public class Student {
      */
     @TableField(value = "student_name")
     private String studentName;
+    /**
+     * 密码
+     */
+    @TableField(value = "password")
+    private String password;
 
     /**
      * 头像
@@ -50,20 +53,24 @@ public class Student {
     /**
      * 逻辑删除
      */
-    @TableField(value = "is_delete")
-    private Integer delete;
+    @TableField(value = "is_deleted")
+    @TableLogic
+    private Integer logicDelete;
 
     /**
      * 创建时间
      */
-    @TableField(value = "gmt_create")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @TableField(value = "gmt_create", fill = FieldFill.INSERT)
     private Date gmtCreate;
 
     /**
      * 修改时间
      */
-    @TableField(value = "gmt_update")
-    private Date gmtUpdate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @TableField(value = "gmt_modified", fill = FieldFill.INSERT_UPDATE)
+    private Date gmtModified;
+
 
     public static final String COL_ID = "id";
 
@@ -75,9 +82,11 @@ public class Student {
 
     public static final String COL_STUDENT_GENDER = "student_gender";
 
-    public static final String COL_IS_DELETE = "is_delete";
+    public static final String COL_IS_DELETED = "is_deleted";
 
     public static final String COL_GMT_CREATE = "gmt_create";
 
-    public static final String COL_GMT_UPDATE = "gmt_update";
+    public static final String COL_GMT_MODIFIED = "gmt_modified";
+
+    public static final String COL_PASSWORD = "password";
 }

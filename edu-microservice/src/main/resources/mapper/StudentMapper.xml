@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.liao.edu.service.mapper.StudentMapper">
-  <resultMap id="BaseResultMap" type="com.liao.edu.common.entity.Student">
-    <!--@mbg.generated-->
-    <!--@Table edu_student-->
-    <id column="id" jdbcType="VARCHAR" property="id" />
-    <result column="student_id" jdbcType="VARBINARY" property="studentId" />
-    <result column="student_name" jdbcType="VARCHAR" property="studentName" />
-    <result column="student_avatar" jdbcType="VARCHAR" property="studentAvatar" />
-    <result column="student_gender" jdbcType="INTEGER" property="studentGender" />
-    <result column="is_delete" jdbcType="TINYINT" property="isDelete" />
-    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
-    <result column="gmt_update" jdbcType="TIMESTAMP" property="gmtUpdate" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    <!--@mbg.generated-->
-    id, student_id, student_name, student_avatar, student_gender, is_delete, gmt_create, 
-    gmt_update
-  </sql>
+    <resultMap id="BaseResultMap" type="com.liao.edu.common.entity.Student">
+        <!--@mbg.generated-->
+        <!--@Table edu_student-->
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="student_id" jdbcType="VARCHAR" property="studentId"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="student_name" jdbcType="VARCHAR" property="studentName"/>
+        <result column="student_avatar" jdbcType="VARCHAR" property="studentAvatar"/>
+        <result column="student_gender" jdbcType="INTEGER" property="studentGender"/>
+        <result column="is_delete" jdbcType="INTEGER" property="logicDelete"/>
+        <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
+        <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id, student_id, student_name, student_avatar, student_gender, is_deleted, gmt_create,password,
+        gmt_modified
+    </sql>
 </mapper>
