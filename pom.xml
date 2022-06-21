@@ -35,7 +35,7 @@
         <lombok.version>1.18.10</lombok.version>
         <swagger2.version>2.9.2</swagger2.version>
         <velocity.version>2.1</velocity.version>
-        <mysql.version>8.0.18</mysql.version>
+        <mysql.version>8.0.28</mysql.version>
         <edu.version>1.0.0-SNAPSHOT</edu.version>
         <aliyun.oss.version>3.8.0</aliyun.oss.version>
         <poi.version>4.1.1</poi.version>
