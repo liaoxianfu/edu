@@ -33,7 +33,7 @@
         <spring.version>2.2.1.RELEASE</spring.version>
         <mybatis-plus.version>3.2.0</mybatis-plus.version>
         <lombok.version>1.18.10</lombok.version>
-        <swagger2.version>2.9.2</swagger2.version>
+        <swagger2.version>2.10.0</swagger2.version>
         <velocity.version>2.1</velocity.version>
         <mysql.version>8.0.18</mysql.version>
         <edu.version>1.0.0-SNAPSHOT</edu.version>
